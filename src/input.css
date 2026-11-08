@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+/* Memaksa wrapper swiper menggunakan flexbox layout secara konsisten */
+.projectSwiper .swiper-wrapper {
+    display: flex;
+    align-items: stretch; /* Ini yang membuat semua slide tingginya sama rata */
+}
+
+/* Memaksa slide bawaan & slide tiruan (cloned) menjadi container flex */
+.projectSwiper .swiper-slide {
+    height: auto !important; 
+    display: flex;
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after{
+    font-size:18px;
+    font-weight:bold;
+    color:black;
+}
+
+.projectSwiper .swiper-button-prev:hover::after,
+.projectSwiper .swiper-button-next:hover::after{
+    color:white;
+}
+
+/* TRIK PAMUNGKAS: Paksa semua element anak di dalam pagination kustom */
+.project-pagination * {
+    width: 24px !important;
+    height: 4px !important;
+    border-radius: 9999px !important;
+    background: #ffffff !important; /* Paksa warna PUTIH */
+    background-color: #ffffff !important; /* Double check warna putih */
+    opacity: 0.3 !important;
+    display: inline-block !important;
+    transition: all 0.3s ease !important;
+}
+
+/* Paksa element yang sedang aktif menjadi lebih panjang dan terang */
+.project-pagination .swiper-pagination-bullet-active {
+    width: 48px !important;
+    opacity: 1 !important;
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+}

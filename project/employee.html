@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="id" x-data="{ darkMode: true }" :class="{ 'dark': darkMode }">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        [x-cloak] { display: none !important; }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 via-gray-100 to-zinc-200 
+             dark:from-[#121214] dark:via-[#18181B] dark:to-[#09090B] 
+             text-gray-800 dark:text-gray-200 min-h-screen font-sans antialiased transition-colors duration-500">
+    <main class="max-w-6xl mx-auto px-4 py-8 md:py-12">
+        
+        <div class="flex justify-between items-center mb-8">
+            <a href="../index.html" class="inline-flex items-center space-x-2 text-sm font-medium text-gray-500 hover:text-black dark:text-gray-400 dark:hover:text-white transition group">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4 transform group-hover:-translate-x-1 transition-transform">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+                </svg>
+                <span>Kembali ke Portofolio</span>
+            </a>
+
+            <button @click="darkMode = !darkMode" class="p-2.5 rounded-xl bg-white/60 dark:bg-white/10 border border-white/40 dark:border-white/20 backdrop-blur-xl shadow-lg hover:bg-white/80 dark:hover:bg-white/20 transition-all duration-300">
+                <svg x-show="darkMode" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-amber-400" x-cloak>
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m0 13.5V21M4.318 6.318l1.591 1.591M16.5 12.5a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM17.682 6.318l-1.591 1.591M6.318 17.682l1.591 1.591M17.682 17.682l-1.591-1.591M3.75 12h2.25m13.5 0h2.25" />
+                </svg>
+                <svg x-show="!darkMode" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-gray-700" x-cloak>
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 12.83A9.78 9.78 0 0 1 12 3a9 9 0 0 0 0 18 9.75 9.75 0 0 0 9.75-8.17Z" />
+                </svg>
+            </button>
+        </div>
+
+        <header class="flex items-center justify-center space-x-3 pb-8 mb-8 border-b border-gray-200 dark:border-neutral-800">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.2" stroke="currentColor" class="w-9 h-9 text-black dark:text-white">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-3-12v.75m0 3v.75m0 3v.75m0 3V18M6 6v.75m0 3v.75m0 3v.75m0 3V18m3-12v.75m0 3v.75m0 3v.75m0 3V18" />
+            </svg>
+            <h1 class="text-3xl md:text-4xl font-black tracking-tight text-gray-900 dark:text-white">
+                Prediksi Employee Attrition (Pengunduran Diri Karyawan) - Detail Proyek
+            </h1>
+        </header>
+
+        <section 
+            class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start mb-12"
+            x-data="{ 
+                activeSlide: 1, 
+                totalSlides: 8, 
+                autoPlayInterval: null,
+                shadowX: 0,
+                shadowY: 0,
+                handleMouseMove(e) {
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    this.shadowX = Math.round(((e.clientX - rect.left) / rect.width - 0.5) * 35);
+                    this.shadowY = Math.round(((e.clientY - rect.top) / rect.height - 0.5) * 35);
+                },
+                resetShadow() {
+                    this.shadowX = 0;
+                    this.shadowY = 0;
+                },
+                init() {
+                    if (this.totalSlides > 1) {
+                        this.autoPlayInterval = setInterval(() => {
+                            this.activeSlide = this.activeSlide === this.totalSlides ? 1 : this.activeSlide + 1;
+                        }, 3000);
+                    }
+                }
+            }">
+            
+            <div class="flex flex-col items-center space-y-4 w-full" x-data="{ isExpanded: false, expandedImgSrc: '' }">
+                <!-- Main Carousel Container -->
+                <div 
+                    @mousemove="handleMouseMove($event)"
+                    @mouseleave="resetShadow(); autoPlayInterval = setInterval(() => { activeSlide = activeSlide === totalSlides ? 1 : activeSlide + 1 }, 3000)"
+                    @mouseenter="clearInterval(autoPlayInterval)" 
+                    :style="darkMode 
+                        ? `box-shadow: ${-shadowX}px ${-shadowY}px 45px -2px rgba(255, 255, 255, 0.12), 0 10px 25px -5px rgba(0,0,0,0.5)` 
+                        : `box-shadow: ${-shadowX}px ${-shadowY}px 40px -5px rgba(0, 0, 0, 0.2)`"
+                    class="relative w-full aspect-[16/11] bg-white/70 dark:bg-white/10 border border-white/60 dark:border-white/20 backdrop-blur-xl rounded-2xl flex items-center justify-center overflow-hidden group transition-all duration-100 ease-out">
+                    
+                    <!-- Previous Button -->
+                    <button 
+                        x-show="totalSlides > 1"
+                        @click="activeSlide = activeSlide === 1 ? totalSlides : activeSlide - 1"
+                        class="absolute left-4 z-40 bg-white/90 dark:bg-neutral-900/90 hover:bg-white dark:hover:bg-neutral-900 p-2.5 rounded-full border border-gray-200 dark:border-neutral-800 text-gray-700 dark:text-gray-300 transition shadow-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" /></svg>
+                    </button>
+
+                    <!-- Images Container -->
+                    <div class="w-full h-full flex items-center justify-center p-4 z-10 relative">
+                        
+                        <!-- Tombol Expand di Pojok Kanan Atas (Muncul saat Hover) -->
+                        <button 
+                            @click="
+                                if(activeSlide === 1) { expandedImgSrc = '../src/img/projects/employee/1.png'; }
+                                else if(activeSlide === 2) { expandedImgSrc = '../src/img/projects/employee/2.png'; }
+                                else if(activeSlide === 3) { expandedImgSrc = '../src/img/projects/employee/3.png'; }
+                                else if(activeSlide === 4) { expandedImgSrc = '../src/img/projects/employee/4.png'; }
+                                else if(activeSlide === 5) { expandedImgSrc = '../src/img/projects/employee/5.png'; }
+                                else if(activeSlide === 6) { expandedImgSrc = '../src/img/projects/employee/6.png'; }
+                                else if(activeSlide === 7) { expandedImgSrc = '../src/img/projects/employee/7.png'; }
+                                else if(activeSlide === 8) { expandedImgSrc = '../src/img/projects/employee/8.png'; }
+                                isExpanded = true;
+                            "
+                            class="absolute top-4 right-4 z-30 bg-black/60 hover:bg-black/80 text-white p-2 rounded-xl backdrop-blur-md opacity-0 group-hover:opacity-100 transition-all duration-300 shadow-md"
+                            title="Perbesar Gambar">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15" />
+                            </svg>
+                        </button>
+
+                        <!-- Gambar Carousel (Bisa diklik langsung juga untuk expand) -->
+                        <img x-show="activeSlide === 1" src="../src/img/projects/employee/1.png" alt="elt-pipeline" @click="isExpanded = true; expandedImgSrc = $el.src" class="max-w-full max-h-full object-contain rounded-xl shadow-sm cursor-zoom-in">
+                    
+                        <template x-if="totalSlides > 1">
+                            <div class="w-full h-full flex items-center justify-center">
+                                <img x-show="activeSlide === 2" src="../src/img/projects/employee/2.png" @click="isExpanded = true; expandedImgSrc = $el.src" class="max-w-full max-h-full object-contain rounded-xl shadow-sm cursor-zoom-in">
+                                <img x-show="activeSlide === 3" src="../src/img/projects/employee/3.png" @click="isExpanded = true; expandedImgSrc = $el.src" class="max-w-full max-h-full object-contain rounded-xl shadow-sm cursor-zoom-in">
+                                <img x-show="activeSlide === 4" src="../src/img/projects/employee/4.png" @click="isExpanded = true; expandedImgSrc = $el.src" class="max-w-full max-h-full object-contain rounded-xl shadow-sm cursor-zoom-in">
+                                <img x-show="activeSlide === 5" src="../src/img/projects/employee/5.png" @click="isExpanded = true; expandedImgSrc = $el.src" class="max-w-full max-h-full object-contain rounded-xl shadow-sm cursor-zoom-in">
+                                <img x-show="activeSlide === 6" src="../src/img/projects/employee/6.png" @click="isExpanded = true; expandedImgSrc = $el.src" class="max-w-full max-h-full object-contain rounded-xl shadow-sm cursor-zoom-in">
+                                <img x-show="activeSlide === 7" src="../src/img/projects/employee/7.png" @click="isExpanded = true; expandedImgSrc = $el.src" class="max-w-full max-h-full object-contain rounded-xl shadow-sm cursor-zoom-in">
+                                <img x-show="activeSlide === 8" src="../src/img/projects/employee/8.png" @click="isExpanded = true; expandedImgSrc = $el.src" class="max-w-full max-h-full object-contain rounded-xl shadow-sm cursor-zoom-in">
+                            </div>
+                        </template>
+                    </div>
+
+                    <!-- Next Button -->
+                    <button 
+                        x-show="totalSlides > 1"
+                        @click="activeSlide = activeSlide === totalSlides ? 1 : activeSlide + 1"
+                        class="absolute right-4 z-40 bg-white/80 dark:bg-neutral-900/80 hover:bg-white dark:hover:bg-neutral-900 p-2.5 rounded-full border border-gray-200 dark:border-neutral-800 text-gray-700 dark:text-gray-300 transition shadow-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+                    </button>
+                </div>
+
+                <!-- Dots Navigation -->
+                <div class="flex space-x-2 justify-center items-center h-4" x-show="totalSlides > 1">
+                    <template x-for="i in totalSlides">
+                        <span 
+                            @click="activeSlide = i"
+                            class="cursor-pointer transition-all duration-300 rounded-full"
+                            :class="activeSlide === i ? 'w-6 h-2 bg-black dark:bg-white' : 'w-2 h-2 bg-gray-300 dark:bg-neutral-700'">
+                        </span>
+                    </template>
+                </div>
+
+                <!-- Modal / Lightbox untuk Expand Gambar -->
+                <div 
+                    x-show="isExpanded" 
+                    x-transition:enter="transition ease-out duration-300"
+                    x-transition:enter-start="opacity-0"
+                    x-transition:enter-end="opacity-100"
+                    x-transition:leave="transition ease-in duration-200"
+                    x-transition:leave-start="opacity-100"
+                    x-transition:leave-end="opacity-0"
+                    class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4 md:p-8"
+                    @click.self="isExpanded = false"
+                    style="display: none;">
+                    
+                    <!-- Tombol Close -->
+                    <button 
+                        @click="isExpanded = false" 
+                        class="absolute top-6 right-6 z-50 bg-white/20 hover:bg-white/40 text-white p-3 rounded-full transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+
+                    <!-- Gambar yang Diperbesar -->
+                    <img :src="expandedImgSrc" class="max-w-full max-h-[90vh] object-contain rounded-2xl shadow-2xl cursor-zoom-out" @click="isExpanded = false">
+                </div>
+            </div>
+
+            <div class="flex flex-col space-y-4 w-full h-full justify-center">
+                
+                <div class="flex items-center space-x-4 bg-white/70 dark:bg-white/10 border border-white/60 dark:border-white/20 backdrop-blur-xl p-5 rounded-2xl shadow-xl transition-all duration-500">
+                    <div class="w-12 h-12 bg-neutral-200/80 dark:bg-white/15 text-neutral-900 dark:text-white rounded-xl flex items-center justify-center flex-shrink-0 transition-colors duration-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" /></svg>
+                    </div>
+                    <div>
+                        <span class="block text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-0.5">Role</span>
+                        <p class="font-extrabold text-gray-800 dark:text-gray-100 text-base md:text-lg">Data Analyst</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-4 bg-white/70 dark:bg-white/10 border border-white/60 dark:border-white/20 backdrop-blur-xl p-5 rounded-2xl shadow-xl transition-all duration-500">
+                    <div class="w-12 h-12 bg-neutral-200/80 dark:bg-white/15 text-neutral-900 dark:text-white rounded-xl flex items-center justify-center flex-shrink-0 transition-colors duration-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" /></svg>
+                    </div>
+                    <div>
+                        <span class="block text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-0.5">Tech Stack</span>
+                        <p class="font-bold text-gray-800 dark:text-gray-100 text-base md:text-lg">Python, Pandas, NumPy, Matplotlib, Seaborn, Scikit-learn (Decision Tree, Random Forest, SimpleImputer, StandardScaler, GridSearchCV), XGBoost, Google Colab</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-4 bg-white/70 dark:bg-white/10 border border-white/60 dark:border-white/20 backdrop-blur-xl p-5 rounded-2xl shadow-xl transition-all duration-500">
+                    <div class="w-12 h-12 bg-neutral-200/80 dark:bg-white/15 text-neutral-900 dark:text-white rounded-xl flex items-center justify-center flex-shrink-0 transition-colors duration-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499c.172-.468.824-.468.996 0l2.406 6.367a1 1 0 0 0 .95.69h6.814c.49 0 .692.63.3.94l-5.517 4.18a1 1 0 0 0-.364 1.118l2.135 5.655c.15.399-.313.742-.646.5l-5.518-4.18a1 1 0 0 0-1.175 0l-5.518 4.18c-.333.242-.797-.101-.646-.5l2.136-5.655a1 1 0 0 0-.364-1.118L2.308 11.62c-.393-.31-.192-.94.3-.94h6.814a1 1 0 0 0 .95-.69l2.406-6.368Z" /></svg>
+                    </div>
+                    <div>
+                        <span class="block text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-0.5">Fitur Utama</span>
+                        <p class="font-medium text-gray-700 dark:text-gray-300 text-sm md:text-base leading-relaxed">Prediksi Employee Attrition, Analisis Data, Visualisasi Data, Model Machine Learning</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <section class="space-y-6">
+            <!-- 1. Background -->
+            <div class="bg-white/20 dark:bg-white/3 border-2 border-black/10 dark:border-white/20 backdrop-blur-xl p-6 md:p-8 rounded-3xl shadow-md space-y-3 transition-all duration-500">
+                <div class="flex items-center space-x-2.5 text-black dark:text-white">
+                    <span class="bg-black text-white dark:bg-white dark:text-black w-8 h-8 rounded-xl flex items-center justify-center font-bold text-sm shadow-sm">📜</span>
+                    <h2 class="text-sm font-black uppercase tracking-wider">Background</h2>
+                </div>
+                <ul class="text-sm md:text-base text-gray-700 dark:text-gray-400 leading-relaxed list-disc list-inside space-y-1.5 pl-1">
+                    <li>Tingkat pengunduran diri karyawan (attrition) merupakan tantangan operasional yang krusial bagi perusahaan karena berdampak langsung pada stabilitas organisasi, beban rekrutmen, dan produktivitas kerja.</li>
+                    <li>Diperlukan pendekatan berbasis data (data-driven) untuk mendeteksi tanda-tanda awal atau faktor pendorong utama mengapa seorang karyawan memutuskan untuk meninggalkan perusahaan (resign).</li>
+                    <li>Dengan memanfaatkan algoritma machine learning, manajemen dapat mengambil langkah preventif yang proaktif melalui perbaikan jalur karier internal maupun evaluasi budaya kerja.</li>
+                </ul>
+            </div>
+
+            <!-- 2. Objective -->
+            <div class="bg-white/20 dark:bg-white/3 border-2 border-black/10 dark:border-white/20 backdrop-blur-xl p-6 md:p-8 rounded-3xl shadow-md space-y-3 transition-all duration-500">
+                <div class="flex items-center space-x-2.5 text-black dark:text-white">
+                    <span class="bg-black text-white dark:bg-white dark:text-black w-8 h-8 rounded-xl flex items-center justify-center font-bold text-sm shadow-sm">🎯</span>
+                    <h2 class="text-sm font-black uppercase tracking-wider">Objective</h2>
+                </div>
+                <ul class="text-sm md:text-base text-gray-700 dark:text-gray-400 leading-relaxed list-disc list-inside space-y-1.5 pl-1">
+                    <li>Membangun model klasifikasi yang handal untuk memprediksi apakah seorang karyawan akan bertahan atau keluar dari perusahaan.</li>
+                    <li>Menganalisis faktor-faktor pendorong utama (feature importance) yang berkorelasi paling kuat terhadap keputusan attrition.</li>
+                    <li>Mengevaluasi dampak pembersihan data tingkat lanjut (preprocessing dan penanganan outlier) terhadap peningkatan akurasi metrik evaluasi model.</li>
+                </ul>
+            </div>
+
+            <!-- 3. Dataset -->
+            <div class="bg-white/20 dark:bg-white/3 border-2 border-black/10 dark:border-white/20 backdrop-blur-xl p-6 md:p-8 rounded-3xl shadow-md space-y-3 transition-all duration-500">
+                <div class="flex items-center space-x-2.5 text-black dark:text-white">
+                    <span class="bg-black text-white dark:bg-white dark:text-black w-8 h-8 rounded-xl flex items-center justify-center font-bold text-sm shadow-sm">📊</span>
+                    <h2 class="text-sm font-black uppercase tracking-wider">Dataset</h2>
+                </div>
+                <ul class="text-sm md:text-base text-gray-700 dark:text-gray-400 leading-relaxed list-disc list-inside space-y-1.5 pl-1">
+                    <li>Sumber Data: Saudi Employee Attrition Dataset yang telah dipisahkan secara independen menjadi data latih (training) dan data uji (testing)[cite: 31].</li>
+                    <li>Struktur Data: Terdiri dari data multivariat karyawan mencakup aspek demografi, kompensasi, tingkat kepuasan kerja, hingga tingkat stres (34 kolom total)[cite: 31, 35].</li>
+                    <li>Variabel Target (Attrition):
+                        <ul class="list-disc list-inside pl-5 mt-1 space-y-1">
+                            <li>0 = Tidak Resign / Stay (proporsi awal $\approx 58.16\%$)[cite: 32, 35]</li>
+                            <li>1 = Resign / Leave (proporsi awal $\approx 41.84\%$)[cite: 32, 35]</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 4. What -->
+            <div class="bg-white/20 dark:bg-white/3 border-2 border-black/10 dark:border-white/20 backdrop-blur-xl p-6 md:p-8 rounded-3xl shadow-md space-y-3 transition-all duration-500">
+                <div class="flex items-center space-x-2.5 text-black dark:text-white">
+                    <span class="bg-black text-white dark:bg-white dark:text-black w-8 h-8 rounded-xl flex items-center justify-center font-bold text-sm shadow-sm">💡</span>
+                    <h2 class="text-sm font-black uppercase tracking-wider">What</h2>
+                </div>
+                <p class="text-sm md:text-base text-gray-700 dark:text-gray-400 leading-relaxed">
+                    Proyek ini adalah sistem kecerdasan buatan (machine learning pipeline) berbasis Python yang memproses data multivariat karyawan—meliputi aspek demografi, kompensasi, tingkat kepuasan kerja, hingga tingkat stres—untuk memprediksi status pengunduran diri karyawan menggunakan algoritma <code class="text-xs bg-black/10 dark:bg-white/10 px-1.5 py-0.5 rounded">Decision Tree</code>, <code class="text-xs bg-black/10 dark:bg-white/10 px-1.5 py-0.5 rounded">Random Forest</code>, dan <code class="text-xs bg-black/10 dark:bg-white/10 px-1.5 py-0.5 rounded">XGBoost</code>[cite: 31].
+                </p>
+            </div>
+
+            <!-- 5. Why -->
+            <div class="bg-white/20 dark:bg-white/3 border-2 border-black/10 dark:border-white/20 backdrop-blur-xl p-6 md:p-8 rounded-3xl shadow-md space-y-3 transition-all duration-500">
+                <div class="flex items-center space-x-2.5 text-black dark:text-white">
+                    <span class="bg-black text-white dark:bg-white dark:text-black w-8 h-8 rounded-xl flex items-center justify-center font-bold text-sm shadow-sm">❓</span>
+                    <h2 class="text-sm font-black uppercase tracking-wider">Why</h2>
+                </div>
+                <ul class="text-sm md:text-base text-gray-700 dark:text-gray-400 leading-relaxed list-disc list-inside space-y-1.5 pl-1">
+                    <li>Mitigasi Biaya & Retensi: Membantu departemen HR mendeteksi risiko kehilangan talenta berharga sebelum keputusan resign benar-benar terjadi.</li>
+                    <li>Wawasan Struktural: Analisis korelasi menunjukkan bahwa fenomena pengunduran diri di perusahaan ini bersifat struktural dan situasional (terkait dengan jabatan, peluang karier, dan departemen), bukan sekadar masalah kompensasi finansial semata[cite: 37].</li>
+                </ul>
+            </div>
+
+            <!-- 6. How -->
+            <div class="bg-white/20 dark:bg-white/3 border-2 border-black/10 dark:border-white/20 backdrop-blur-xl p-6 md:p-8 rounded-3xl shadow-md space-y-3 transition-all duration-500">
+                <div class="flex items-center space-x-2.5 text-black dark:text-white">
+                    <span class="bg-black text-white dark:bg-white dark:text-black w-8 h-8 rounded-xl flex items-center justify-center font-bold text-sm shadow-sm">&lt;/&gt;</span>
+                    <h2 class="text-sm font-black uppercase tracking-wider">How</h2>
+                </div>
+                <div class="text-sm md:text-base text-gray-700 dark:text-gray-400 leading-relaxed space-y-3">
+                    <ol class="list-decimal list-inside space-y-2 pl-1">
+                        <li><strong>Eksplorasi Data Awal (EDA)</strong>: Melakukan pemeriksaan distribusi target, deteksi missing values, serta pembuatan heatmap korelasi untuk melihat hubungan antar fitur[cite: 32, 33].</li>
+                        <li><strong>Tahap Preprocessing</strong>:
+                            <ul class="list-disc list-inside pl-5 mt-1 space-y-1">
+                                <li>Menghapus nilai kosong (missing values) dan data duplikat pada data latih[cite: 39].</li>
+                                <li>Menangani outlier pada kolom numerik kontinu (<code class="text-xs bg-black/10 dark:bg-white/10 px-1.5 py-0.5 rounded">Age</code>, <code class="text-xs bg-black/10 dark:bg-white/10 px-1.5 py-0.5 rounded">Years_Experience</code>, <code class="text-xs bg-black/10 dark:bg-white/10 px-1.5 py-0.5 rounded">MonthlySalary</code>, <code class="text-xs bg-black/10 dark:bg-white/10 px-1.5 py-0.5 rounded">Allowances</code>, <code class="text-xs bg-black/10 dark:bg-white/10 px-1.5 py-0.5 rounded">Distance_to_work</code>) menggunakan metode berbasis aturan bisnis (domain-driven IQR filtering)[cite: 39].</li>
+                            </ul>
+                        </li>
+                        <li><strong>Pemodelan & Evaluasi</strong>: Melatih tiga model utama (Decision Tree, Random Forest, XGBoost) pada data latih dan mengevaluasinya menggunakan data uji independen dengan metrik Accuracy, Precision, Recall, F1-Score, dan Confusion Matrix[cite: 37, 38, 39].</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- 7. Results -->
+            <div class="bg-white/20 dark:bg-white/3 border-2 border-black/10 dark:border-white/20 backdrop-blur-xl p-6 md:p-8 rounded-3xl shadow-md space-y-3 transition-all duration-500">
+                <div class="flex items-center space-x-2.5 text-black dark:text-white">
+                    <span class="bg-black text-white dark:bg-white dark:text-black w-8 h-8 rounded-xl flex items-center justify-center font-bold text-sm shadow-sm">📈</span>
+                    <h2 class="text-sm font-black uppercase tracking-wider">Results</h2>
+                </div>
+                <div class="text-sm md:text-base text-gray-700 dark:text-gray-400 leading-relaxed space-y-2">
+                    <ul class="list-disc list-inside space-y-1.5 pl-1">
+                        <li>Sebelum Preprocessing: Model XGBoost memberikan performa awal tertinggi dengan akurasi 81.28% (F1-Score: 0.7634), diikuti oleh Random Forest (76.17%) dan Decision Tree (71.06%)[cite: 38].</li>
+                        <li>Sesudah Preprocessing: Setelah pembersihan outlier dan missing values, performa seluruh model mengalami peningkatan yang konsisten[cite: 41]:
+                            <ul class="list-disc list-inside pl-5 mt-1 space-y-1">
+                                <li>XGBoost: Akurasi meningkat menjadi 82.12% (Precision: 0.8372, Recall: 0.72, F1-Score: 0.7742)[cite: 40].</li>
+                                <li>Random Forest: Akurasi meningkat menjadi 77.02% (F1-Score: 0.7033)[cite: 40].</li>
+                                <li>Decision Tree: Akurasi meningkat menjadi 73.62% (F1-Score: 0.6667)[cite: 40].</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 8. Conclusion -->
+            <div class="bg-white/20 dark:bg-white/3 border-2 border-black/10 dark:border-white/20 backdrop-blur-xl p-6 md:p-8 rounded-3xl shadow-md space-y-3 transition-all duration-500">
+                <div class="flex items-center space-x-2.5 text-black dark:text-white">
+                    <span class="bg-black text-white dark:bg-white dark:text-black w-8 h-8 rounded-xl flex items-center justify-center font-bold text-sm shadow-sm">🏁</span>
+                    <h2 class="text-sm font-black uppercase tracking-wider">Conclusion</h2>
+                </div>
+                <ul class="text-sm md:text-base text-gray-700 dark:text-gray-400 leading-relaxed list-disc list-inside space-y-1.5 pl-1">
+                    <li>Pembersihan data yang terstruktur (khususnya penanganan missing value dan penyaringan outlier berbasis domain) terbukti mampu meningkatkan stabilitas dan akurasi prediksi model secara keseluruhan[cite: 41].</li>
+                    <li>Algoritma berbasis ensemble dan gradient boosting seperti XGBoost terbukti paling superior dalam menangani kompleksitas data multivariat pada kasus prediksi employee attrition ini[cite: 40].</li>
+                    <li>Pihak manajemen perusahaan disarankan untuk tidak hanya fokus pada kenaikan gaji, tetapi juga memperhatikan faktor struktural seperti kejelasan jalur karier internal, penataan beban kerja berdasarkan jabatan, serta evaluasi kepemimpinan di tingkat departemen[cite: 37].</li>
+                </ul>
+            </div>
+
+        </section>
+        <footer class="mt-12 pt-6 border-t border-gray-200 dark:border-neutral-800 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <p class="text-xs text-gray-400 dark:text-gray-500">© 2026 QSPR Case Study. Seluruh Hak Cipta Dilindungi.</p>
+            <div class="flex items-center space-x-4 w-full sm:w-auto">
+                <a href="https://colab.research.google.com/drive/1YWC3TyrCqMUyw10h8A9cE4lni9dhd85T?usp=sharing" target="_blank"
+                   class="flex-1 sm:flex-initial flex items-center justify-center space-x-2 px-6 py-2.5 bg-white/70 dark:bg-white/10 border border-gray-200 dark:border-white/20 hover:bg-white/90 dark:hover:bg-white/20 text-gray-700 dark:text-gray-300 font-medium rounded-xl transition text-sm shadow-md backdrop-blur-xl">
+                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+                    </svg>
+                    <span>Dokumen</span>
+                </a>
+            </div>
+        </footer>
+    </main>
+</body>
+</html>

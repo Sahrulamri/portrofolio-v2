@@ -1,0 +1,2212 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" style="scroll-behavior: smooth; scroll-timing-function: ease-in-out;">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio</title>
+
+  <!-- Tailwind CDN -->
+  <link href="./src/output.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!-- Sweeeper CDN -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+/>
+
+
+  <!-- Google Font: Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+  <!-- Alphine.js -->
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
+  <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+/>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <style>
+    body { font-family: 'Poppins', sans-serif; }
+    html {
+        scroll-behavior: smooth;
+        scroll-timing-function: ease-in-out; /* ini yang kamu maksud */
+        }
+
+    .blinking-cursor {
+      animation: blink 0.7s infinite;
+    }
+
+    /* Project carousel layout */
+    #projects .projectSwiper {
+      width: 100%;
+      overflow: hidden;
+    }
+    #projects .swiper-wrapper {
+      align-items: stretch;
+    }
+    #projects .swiper-slide {
+      height: auto;
+      display: flex;
+      align-items: stretch;
+    }
+    #projects .project-card {
+      width: 100%;
+      min-width: 0;
+    }
+    #projects .project-image {
+      display: block;
+      height: 190px;
+      padding: 10px;
+      object-fit: contain;
+      background: #f3f4f6;
+    }
+    #projects .project-pagination .swiper-pagination-bullet {
+      width: 8px;
+      height: 8px;
+      opacity: .45;
+      background: #fff;
+    }
+    #projects .project-pagination .swiper-pagination-bullet-active {
+      width: 22px;
+      border-radius: 999px;
+      opacity: 1;
+    }
+    @media (max-width: 767px) {
+      #projects .project-image { height: 170px; }
+      #projects .projectSwiper { padding-left: 4px; padding-right: 4px; }
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      50.01%, 100% { opacity: 0; }
+    }
+
+    /* Sweper */
+   
+
+      /* Pastikan container menjadi acuan posisi */
+      #projects .carousel-container {
+          position: relative;
+      }
+
+/* ========================================
+   PROJECT CARD - UNIFORM & RESPONSIVE LAYOUT
+======================================== */
+
+#projects .swiper-wrapper {
+    align-items: stretch; /* Memaksa semua slide dalam 1 baris memiliki tinggi yang sama */
+}
+
+#projects .swiper-slide {
+    height: auto;
+    display: flex;
+}
+
+/* Card utama mengisi penuh tinggi slide */
+#projects .project-card {
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Gambar proporsional */
+#projects .project-image {
+    width: 100%;
+    height: 170px;
+    flex-shrink: 0;
+    object-fit: contain;
+    background-color: #f3f4f6;
+    display: block;
+}
+
+/* Container Konten */
+#projects .project-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 1.25rem;
+    min-width: 0;
+}
+
+/* Target 3: Judul Maksimal 2 Baris + Truncate (...) */
+#projects .project-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    line-height: 1.4rem;
+    height: 2.8rem; /* Mengunci tinggi tepat untuk 2 baris */
+    margin-bottom: 0.75rem;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Area Teknologi Seragam (Maksimal 2 baris tag tech) */
+/* ========================================
+   FIXED PROJECT TECH CONTAINER
+======================================== */
+
+#projects .project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    gap: 6px;
+    
+    /* Hapus height kaku atau max-height yang membuat teks terpotong */
+    height: auto; 
+    min-height: auto;
+    max-height: none;
+    
+    overflow: visible; /* Mencegah elemen terpotong secara visual */
+    margin-bottom: 12px; /* Memberikan jarak rapi antara tech stack dan deskripsi */
+}
+
+/* Target 4: Deskripsi Maksimal 3 Baris + Truncate (...) */
+#projects .project-description {
+    font-size: 0.875rem;
+    line-height: 1.35rem;
+    height: 4.05rem; /* Mengunci tinggi tepat untuk 3 baris */
+    margin-bottom: 1rem;
+    color: #d1d5db;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Target 1: Mendorong Tombol ke Paling Bawah tanpa Space Kosong Liar */
+#projects .project-actions {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+#projects .project-actions a {
+    margin-bottom: 0;
+}
+
+/* Target 2: Tampilan Responsive (Mobile) */
+@media (max-width: 640px) {
+    #projects .project-image {
+        height: 150px;
+    }
+
+    #projects .project-content {
+        padding: 1rem;
+    }
+
+    #projects .project-title {
+        font-size: 1rem;
+        line-height: 1.3rem;
+        height: 2.6rem;
+    }
+}
+
+/* Sertifikate */
+/* ==========================================
+   CERTIFICATE SECTION
+========================================== */
+
+#certificates {
+    position: relative;
+    z-index: 0;
+    isolation: isolate;
+
+    background: linear-gradient(
+        to bottom,
+        #1e1e1e 0%,
+        #191919 30%,
+        #101010 65%,
+        #000000 100%
+    );
+}
+.certificateSwiper {
+    width: 100%;
+    overflow: hidden;
+    padding: 20px 0 30px;
+}
+
+.certificateSwiper .swiper-wrapper {
+    align-items: stretch;
+    transition-timing-function: linear !important;
+}
+
+.certificateSwiper .swiper-slide {
+    height: auto;
+    display: flex;
+}
+
+/* Kartu mengikuti ukuran gambar */
+.certificate-card {
+    width: 100%;
+    height: 100%;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    background: #f4f4f5;
+    border: 1px solid rgba(255,255,255,0.6);
+    border-radius: 16px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.22);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.certificate-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 18px 38px rgba(0,0,0,0.3);
+}
+
+.certificate-card img {
+    display: block;
+    width: 100%;
+    height: 440px;
+    object-fit: contain;
+    object-position: center;
+    background: #ffffff;
+    border-radius: 10px;
+}
+
+.certificate-card p {
+    flex-shrink: 0;
+    margin-top: 10px;
+    text-align: center;
+    color: #374151;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+/* ==========================================
+   MODAL / LIGHTBOX
+========================================== */
+
+#certificateModal {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 100000 !important;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    padding: 60px 20px 25px;
+
+    background: rgba(0, 0, 0, 0.94);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+}
+
+#certificateModal.show {
+    display: flex !important;
+}
+
+/* Wrapper gambar */
+#certificateModal .modal-content {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 100%;
+    max-width: 1100px;
+    max-height: 100%;
+}
+
+/* Gambar modal */
+#modalImage {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+
+    object-fit: contain;
+    object-position: center;
+
+    background: #ffffff;
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 12px;
+
+    box-shadow: 0 20px 70px rgba(0,0,0,0.65);
+}
+
+/* Tombol X selalu di pojok kanan atas layar */
+.modal-close {
+    position: fixed !important;
+    top: 20px !important;
+    right: 22px !important;
+
+    z-index: 100010 !important;
+
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+
+    width: 46px;
+    height: 46px;
+
+    color: white;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 50%;
+
+    cursor: pointer;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+
+    transition: all 0.25s ease;
+}
+
+.modal-close:hover {
+    color: #18181b;
+    background: white;
+    transform: rotate(90deg);
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 640px) {
+    .certificate-card img {
+        height: 350px;
+    }
+}
+
+@media (min-width: 641px) and (max-width: 1023px) {
+    .certificate-card img {
+        height: 400px;
+    }
+}
+
+    .certificateSwiper {
+        padding: 15px 0 25px;
+    }
+
+    .certificate-card {
+        padding: 9px;
+        border-radius: 13px;
+    }
+
+    .certificate-card img {
+        height: 300px;
+    }
+
+    #certificateModal {
+        padding: 65px 12px 15px;
+    }
+
+    #certificateModal .modal-content {
+        width: 100%;
+    }
+
+    #modalImage {
+        max-width: 100%;
+        max-height: 100%;
+        border-radius: 8px;
+    }
+
+    .modal-close {
+        top: 12px !important;
+        right: 12px !important;
+        width: 42px;
+        height: 42px;
+    }
+
+
+/* End Of Serrtifikat */
+
+  </style>
+</head>
+<body class="bg-gradient-to-b from-black via-gray-800 to-gray-300 text-white" x-data="{ openModal: false }">
+
+  <!-- ✅ Navbar -->
+  <header class="fixed top-0 left-0 w-full bg-black/40 backdrop-blur-md z-50 h-20 flex items-center shadow-md shadow-white rounded-bl-3xl rounded-br-3xl">
+    <nav class="max-w-7xl mx-auto flex items-center justify-between w-full px-6">
+      <h1 class="text-2xl font-bold text-white">PORTFOLIO</h1>
+
+      <!-- Desktop Menu -->
+      <ul class="hidden md:flex space-x-8 font-medium">
+        <li><a href="#home" class="hover:text-gray-300">Home</a></li>
+        <li><a href="#about" class="hover:text-gray-300">About</a></li>
+        <li><a href="#techstack" class="hover:text-gray-300">TechStack</a></li>
+        <li><a href="#projects" class="hover:text-gray-300">Project</a></li>
+        <li><a href="#contact" class="hover:text-gray-300">Contact</a></li>
+      </ul>
+
+      <!-- Mobile Hamburger -->
+      <button id="menu-btn" class="md:hidden text-white text-3xl">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </nav>
+  </header>
+
+  <!-- ✅ Mobile Slide-in Menu with Overlay -->
+  <div id="overlay" class="fixed inset-0 bg-black/50 backdrop-blur-md hidden z-40"></div>
+  <div id="mobile-menu" class="fixed top-0 right-0 w-64 h-full bg-black/50 backdrop-blur-md shadow-lg translate-x-full transition-transform duration-300 z-50 p-6 flex flex-col space-y-6">
+    <button id="close-btn" class="text-white text-2xl self-end">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    <a href="#home" class="hover:text-gray-300">Home</a>
+    <a href="#about" class="hover:text-gray-300">About</a>
+    <a href="#techstack" class="hover:text-gray-300">TechStack</a>
+    <a href="#projects" class="hover:text-gray-300">Project</a>
+    <a href="#contact" class="hover:text-gray-300">Contact</a>
+  </div>
+
+  <script>
+    const menuBtn = document.getElementById("menu-btn");
+    const closeBtn = document.getElementById("close-btn");
+    const mobileMenu = document.getElementById("mobile-menu");
+    const overlay = document.getElementById("overlay");
+
+    function openMenu() {
+      mobileMenu.classList.remove("translate-x-full");
+      overlay.classList.remove("hidden");
+    }
+
+    function closeMenu() {
+      mobileMenu.classList.add("translate-x-full");
+      overlay.classList.add("hidden");
+    }
+
+    menuBtn.addEventListener("click", openMenu);
+    closeBtn.addEventListener("click", closeMenu);
+    overlay.addEventListener("click", closeMenu);
+  </script>
+
+  <!-- ✅ Hero Section -->
+<section id="home" class="pt-28 px-4 md:px-6 flex items-center min-h-screen bg-gradient-to-b from-black/90 via-gray-800 to-white">
+  <div class="max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center w-full gap-10 md:gap-14">
+
+    <!-- Left Content -->
+    <div class="flex-1 text-center md:text-left mt-6">
+
+      <h2 class="text-xl md:text-2xl text-white">Halo Saya</h2>
+      <h1 class="text-3xl md:text-5xl font-bold mt-4 text-white">Sahrul Amri</h1>
+      <p class="text-xl md:text-2xl font-semibold mt-4 text-gray-200">
+        <span id="typing"></span><span class="blinking-cursor">|</span>
+      </p>
+
+      <p class="mt-5 text-gray-200 max-w-lg mx-auto md:mx-0">
+        Menciptakan Website Yang Inovatif, Fungsional, dan User-Friendly untuk Solusi Digital.
+      </p>
+
+      <div class="relative inline-block w-64">
+    <!-- Button -->
+    <button
+        id="cvDropdownBtn"
+        class="w-full px-6 py-3 mt-6 bg-white text-black rounded-lg font-semibold shadow-lg hover:bg-gray-200 transition flex items-center justify-between">
+
+        <span class="flex items-center gap-2">
+            Download CV
+            <i class="fa-solid fa-download"></i>
+        </span>
+
+        <i id="chevronIcon" class="fa-solid fa-chevron-down text-sm"></i>
+    </button>
+
+    <!-- Dropdown -->
+<!-- Dropdown -->
+<div
+    id="cvDropdown"
+    class="hidden absolute left-0 mt-2 w-full overflow-hidden rounded-lg border border-gray-300 bg-white shadow-xl z-50">
+
+    <!-- CV English -->
+    <a
+        href="https://drive.google.com/uc?export=download&id=1DiF6IE0ZvDThCf9KEfG1RK8cKPwZvuI0"
+        download="CV_Sahrul_Amri_English.pdf"
+        class="flex items-center gap-3 border-b border-gray-300 px-4 py-3 text-gray-800 transition-colors hover:bg-gray-200 ease-in-out duration-300">
+
+        <i class="fa-solid fa-file-pdf text-red-500"></i>
+        <span>CV English</span>
+        
+    </a>
+
+    <!-- CV Bahasa Indonesia -->
+    <a
+        href="https://drive.google.com/uc?export=download&id=133aGTq6YGUbhsyVL-fJgeAXiIjashNRL"
+        download="CV_Sahrul_Amri_Bahasa_Indonesia.pdf"
+        class="flex items-center gap-3 px-4 py-3 text-gray-800 transition-colors hover:bg-gray-200 ease-in-out duration-300">
+
+        <i class="fa-solid fa-file-pdf text-red-500"></i>
+        <span>CV Bahasa Indonesia</span>
+        
+    </a>
+
+</div>
+</div>
+    
+    
+
+      <!-- Social Icons -->
+      <div class="flex justify-center md:justify-start gap-4 mt-6 text-black">
+        <a href="https://www.linkedin.com/in/sahrul-amri-59022b216" target="_blank" class="w-12 h-12 bg-gray-100 rounded-full shadow-md hover:opacity-80 flex items-center justify-center">
+          <i class="fab fa-linkedin text-xl"></i>
+        </a>
+        <a href="https://github.com/Sahrulamri" target="_blank" class="w-12 h-12 bg-gray-100 rounded-full shadow-md hover:opacity-80 flex items-center justify-center">
+          <i class="fab fa-github text-xl"></i>
+        </a>
+        <a href="mailto:sahrulamri898@gmail.com" target="_blank" class="w-12 h-12 bg-gray-100 rounded-full shadow-md hover:opacity-80 flex items-center justify-center">
+          <i class="fa-solid fa-envelope text-xl"></i>
+        </a>
+      </div>
+
+    </div>
+
+    <!-- Right Image -->
+    <div class="flex-1 flex justify-center md:justify-end mt-10 md:mt-0">
+      <div class="w-72 h-88 md:w-96 md:h-[28rem] bg-gray-700 rounded-3xl shadow-[0_0_20px_rgba(0,0,0,0.6)] overflow-hidden transition duration-300 hover:shadow-[0_0_40px_rgba(0,0,0,0.9)]">
+        <img src="src/img/profile.png" class="w-full h-full object-cover object-top" alt="Profile Picture">
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+ <!-- About Me Section -->
+<section id="about" class="h-screen px-6 md:px-16 bg-gradient-to-b from-white via-gray-500 to-black text-black dark:text-white flex items-center">
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center md:items-start gap-10 md:gap-16 w-full">
+
+    <!-- About Text & Stats -->
+    <div class="flex-1 text-left order-1 md:order-2">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 text-center md:text-left">About Me</h2>
+      <p class="text-gray-800 dark:text-gray-300 mb-8 max-w-lg text-center md:text-left mx-auto md:mx-0">
+        Saya adalah seorang Software Engineer yang berfokus pada pengembangan sistem cerdas dan aplikasi digital.
+        Dengan pengalaman di bidang web development dan Machine Learning, saya berkomitmen untuk menciptakan solusi
+        teknologi yang efisien, scalable, dan bermanfaat bagi banyak orang.
+      </p>
+
+      <!-- Stats -->
+      <div class="flex flex-wrap gap-8 justify-center md:justify-start">
+        <div>
+          <h3 class="text-3xl md:text-4xl font-bold">10+</h3>
+          <p class="text-gray-700 dark:text-gray-400">Project</p>
+        </div>
+        <div>
+          <h3 class="text-3xl md:text-4xl font-bold">3 <span class="text-sm">Years</span></h3>
+          <p class="text-gray-700 dark:text-gray-400">Experience</p>
+        </div>
+        <div>
+          <h3 class="text-3xl md:text-4xl font-bold">20+</h3>
+          <p class="text-gray-700 dark:text-gray-400">Certificate</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Skills Cards -->
+    <div class="flex-1 flex flex-col gap-6 md:gap-8 w-full md:w-auto order-2 md:order-1">
+      <div class="flex items-center gap-4 bg-gray-200 dark:bg-gray-700 text-black dark:text-white rounded-lg p-5 shadow-md hover:shadow-xl transition">
+        <i class="fa-solid fa-newspaper text-2xl"></i>
+        <span class="font-bold text-lg md:text-xl">Web Developer</span>
+      </div>
+      <div class="flex items-center gap-4 bg-gray-200 dark:bg-gray-700 text-black dark:text-white rounded-lg p-5 shadow-md hover:shadow-xl transition">
+        <i class="fa-solid fa-square-check text-2xl"></i>
+        <span class="font-bold text-lg md:text-xl">Data Science</span>
+      </div>
+      <div class="flex items-center gap-4 bg-gray-200 dark:bg-gray-700 text-black dark:text-white rounded-lg p-5 shadow-md hover:shadow-xl transition">
+        <i class="fa-solid fa-laptop-code text-2xl"></i>
+        <span class="font-bold text-lg md:text-xl">Machine Learning</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="min-h-screen bg-gradient-to-b from-black to-white flex items-center" id="techstack">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <!-- Title -->
+    <h2 class="text-white text-3xl sm:text-4xl font-bold mb-12">TechStack</h2>
+
+    <!-- Flex Container -->
+    <div class="flex flex-wrap justify-center gap-6">
+      
+      <!-- Card Example -->
+      <div class="flex items-center gap-4 bg-white px-6 py-4 rounded-xl shadow-lg 
+                  hover:scale-105 hover:shadow-2xl transition-transform duration-300 
+                  w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" 
+             alt="Javascript" class="w-10 h-10"/>
+        <span class="font-semibold text-gray-800 text-lg">Javascript</span>
+      </div>
+
+      <!-- React -->
+      <div class="flex items-center gap-4 bg-white px-6 py-4 rounded-xl shadow-lg 
+                  hover:scale-105 hover:shadow-2xl transition-transform duration-300 
+                  w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" 
+             alt="React" class="w-10 h-10"/>
+        <span class="font-semibold text-gray-800 text-lg">React</span>
+      </div>
+
+      <!-- Laravel -->
+      <div class="flex items-center gap-4 bg-white px-6 py-4 rounded-xl shadow-lg 
+                  hover:scale-105 hover:shadow-2xl transition-transform duration-300 
+                  w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+        <img src="src/img/laravel.png" 
+             alt="Laravel" class="w-10 h-10"/>
+        <span class="font-semibold text-gray-800 text-lg">Laravel</span>
+      </div>
+
+      <!-- NextJS -->
+      <div class="flex items-center gap-4 bg-white px-6 py-4 rounded-xl shadow-lg 
+                  hover:scale-105 hover:shadow-2xl transition-transform duration-300 
+                  w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" 
+             alt="NextJS" class="w-10 h-10"/>
+        <span class="font-semibold text-gray-800 text-lg">NextJS</span>
+      </div>
+
+      <!-- Golang -->
+      <div class="flex items-center gap-4 bg-white px-6 py-4 rounded-xl shadow-lg 
+                  hover:scale-105 hover:shadow-2xl transition-transform duration-300 
+                  w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg" 
+             alt="Golang" class="w-10 h-10"/>
+        <span class="font-semibold text-gray-800 text-lg">Golang</span>
+      </div>
+
+      <!-- NodeJS -->
+      <div class="flex items-center gap-4 bg-white px-6 py-4 rounded-xl shadow-lg 
+                  hover:scale-105 hover:shadow-2xl transition-transform duration-300 
+                  w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" 
+             alt="NodeJS" class="w-10 h-10"/>
+        <span class="font-semibold text-gray-800 text-lg">NodeJS</span>
+      </div>
+
+      <!-- Tailwind -->
+      <div class="flex items-center gap-4 bg-white px-6 py-4 rounded-xl shadow-lg 
+                  hover:scale-105 hover:shadow-2xl transition-transform duration-300 
+                  w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" 
+             alt="Tailwind" class="w-10 h-10"/>
+        <span class="font-semibold text-gray-800 text-lg">Tailwind</span>
+      </div>
+
+      <!-- Bootstrap -->
+      <div class="flex items-center gap-4 bg-white px-6 py-4 rounded-xl shadow-lg 
+                  hover:scale-105 hover:shadow-2xl transition-transform duration-300 
+                  w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" 
+             alt="Bootstrap" class="w-10 h-10"/>
+        <span class="font-semibold text-gray-800 text-lg">Bootstrap</span>
+      </div>
+
+      <!-- MySQL -->
+      <div class="flex items-center gap-4 bg-white px-6 py-4 rounded-xl shadow-lg 
+                  hover:scale-105 hover:shadow-2xl transition-transform duration-300 
+                  w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" 
+             alt="MySQL" class="w-10 h-10"/>
+        <span class="font-semibold text-gray-800 text-lg">MySQL</span>
+      </div>
+
+      <!-- Python -->
+      <div class="flex items-center gap-4 bg-white px-6 py-4 rounded-xl shadow-lg 
+                  hover:scale-105 hover:shadow-2xl transition-transform duration-300 
+                  w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" 
+             alt="Python" class="w-10 h-10"/>
+        <span class="font-semibold text-gray-800 text-lg">Python</span>
+      </div>
+
+      <!-- Jupyter -->
+      <div class="flex items-center gap-4 bg-white px-6 py-4 rounded-xl shadow-lg 
+                  hover:scale-105 hover:shadow-2xl transition-transform duration-300 
+                  w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jupyter/jupyter-original.svg" 
+             alt="Jupyter" class="w-10 h-10"/>
+        <span class="font-semibold text-gray-800 text-lg">Jupyter</span>
+      </div>
+
+      <!-- YOLOv8 -->
+      <div class="flex items-center gap-4 bg-white px-6 py-4 rounded-xl shadow-lg 
+                  hover:scale-105 hover:shadow-2xl transition-transform duration-300 
+                  w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+        <img src="src/img/yolo.png" 
+             alt="YOLOv8" class="w-10 h-10"/>
+        <span class="font-semibold text-gray-800 text-lg">YOLOv8</span>
+      </div>
+
+      <!-- Flask -->
+      <div class="flex items-center gap-4 bg-white px-6 py-4 rounded-xl shadow-lg 
+                  hover:scale-105 hover:shadow-2xl transition-transform duration-300 
+                  w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg" 
+             alt="Flask" class="w-10 h-10"/>
+        <span class="font-semibold text-gray-800 text-lg">Flask</span>
+      </div>
+
+      <!-- ExpressJS -->
+      <div class="flex items-center gap-4 bg-white px-6 py-4 rounded-xl shadow-lg 
+                  hover:scale-105 hover:shadow-2xl transition-transform duration-300 
+                  w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" 
+             alt="ExpressJS" class="w-10 h-10"/>
+        <span class="font-semibold text-gray-800 text-lg">ExpressJS</span>
+      </div>
+
+      <!-- Prisma -->
+      <div class="flex items-center gap-4 bg-white px-6 py-4 rounded-xl shadow-lg 
+                  hover:scale-105 hover:shadow-2xl transition-transform duration-300 
+                  w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prisma/prisma-original.svg" 
+             alt="Prisma" class="w-10 h-10"/>
+        <span class="font-semibold text-gray-800 text-lg">Prisma</span>
+      </div>
+
+      <!-- Tensorflow -->
+      <div class="flex items-center gap-4 bg-white px-6 py-4 rounded-xl shadow-lg 
+                  hover:scale-105 hover:shadow-2xl transition-transform duration-300 
+                  w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" 
+             alt="Tensorflow" class="w-10 h-10"/>
+        <span class="font-semibold text-gray-800 text-lg">Tensorflow</span>
+      </div>
+
+      <!-- Kotlin -->
+      <div class="flex items-center gap-4 bg-white px-6 py-4 rounded-xl shadow-lg 
+                  hover:scale-105 hover:shadow-2xl transition-transform duration-300 
+                  w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg" 
+             alt="Kotlin" class="w-10 h-10"/>
+        <span class="font-semibold text-gray-800 text-lg">Kotlin</span>
+      </div>
+
+      <!-- Figma -->
+      <div class="flex items-center gap-4 bg-white px-6 py-4 rounded-xl shadow-lg 
+                  hover:scale-105 hover:shadow-2xl transition-transform duration-300 
+                  w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" 
+             alt="Figma" class="w-10 h-10"/>
+        <span class="font-semibold text-gray-800 text-lg">Figma</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="projects" class="py-20 bg-gradient-to-b from-white via-gray-400 to-black">
+    <h2 class="text-4xl font-bold text-center text-white mb-12">
+        Project
+    </h2>
+
+    <div class="flex justify-center items-center gap-4 mb-4 flex-wrap">
+
+        <button
+            class="filter-btn inline-flex items-center bg-white text-black px-6 py-2 rounded-full" data-filter="all">
+            All
+        </button>
+
+        <button
+            class="filter-btn inline-flex items-center bg-gray-800 text-white  px-6 py-2 rounded-full" data-filter="fullstack">
+            Fullstack
+        </button>
+
+        <button
+            class="filter-btn inline-flex items-center bg-gray-800 text-white px-6 py-2 rounded-full" data-filter="data">
+            Data Science & AI
+        </button>
+
+    </div>
+
+    <div class="w-full max-w-7xl mx-auto px-4">
+
+    <div class="flex items-center gap-4">
+
+        <!-- Tombol Previous -->
+        <button id="prevBtn"
+            class="shrink-0 w-12 h-12 rounded-full bg-white text-black shadow-lg hover:bg-black hover:text-white transition hidden md:flex items-center justify-center">
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+
+        <!-- Swiper -->
+        <div class="swiper projectSwiper flex-1 min-w-0 px-1 pb-14">
+
+            <div class="swiper-wrapper">
+<!-- ================= CARD 1 ================= -->
+    <div class="swiper-slide" data-category="fullstack" data-id="1">
+        <div class="project-card bg-[#1E1E1E] rounded-2xl overflow-hidden border border-gray-700 shadow-lg transition duration-300 hover:-translate-y-2 hover:shadow-2xl">
+            <img src="src/img/arbgp.png" alt="AR BGP" class="project-image transition duration-300">
+
+            <div class="project-content text-white">
+                <h3 class="project-title">AR BGP</h3>
+
+                <div class="project-tech">
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Laravel</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Bootstrap</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">MySQL</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">AR JS</span>
+                </div>
+
+                <p class="project-description">
+                    Website company profile CV. Bagaskara Galih Perkasa yang dilengkapi teknologi Augmented Reality.
+                </p>
+
+                <div class="project-actions">
+                    <a href="/project/detail-arbgp.html" class="detail-btn w-full bg-gray-700 text-white py-2 rounded-full hover:bg-gray-200 text-center hover:text-gray-600 ease-in-out duration-300 transition" data-id="4">Detail</a>
+                    <a href="https://github.com/IVAN96F/bgp.git" target="_blank" rel="noopener noreferrer" class="block text-center bg-white text-black py-2 rounded-full font-medium hover:bg-gray-300 transition">GitHub</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= CARD 2 ================= -->
+    <div class="swiper-slide" data-category="fullstack" data-id="2">
+        <div class="project-card bg-[#1E1E1E] rounded-2xl overflow-hidden border border-gray-700 shadow-lg transition duration-300 hover:-translate-y-2 hover:shadow-2xl">
+            <img src="src/img/semol.png" alt="service motor online" class="project-image transition duration-300">
+
+            <div class="project-content text-white">
+                <h3 class="project-title">Service Motor Online</h3>
+
+                <div class="project-tech">
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Laravel</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">TailwindCSS</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">MySQL</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Javascript</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">AlpineJS</span>
+                </div>
+
+                <p class="project-description">
+                    Website service motor online untuk melakukan booking service motor, pesan sparepart, dan melihat status service motor.
+                </p>
+
+                <div class="project-actions">
+                    <a href="/project/detail-semol.html" class="detail-btn w-full bg-gray-700 text-white py-2 rounded-full hover:bg-gray-200 text-center hover:text-gray-600 ease-in-out duration-300 transition" data-id="5">Detail</a>
+                    <a href="https://github.com/IVAN96F/bgp.git" target="_blank" rel="noopener noreferrer" class="block text-center bg-white text-black py-2 rounded-full font-medium hover:bg-gray-300 transition">GitHub</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= CARD 3 ================= -->
+    <div class="swiper-slide" data-category="data" data-id="3">
+        <div class="project-card bg-[#1E1E1E] rounded-2xl overflow-hidden border border-gray-700 shadow-lg transition duration-300 hover:-translate-y-2 hover:shadow-2xl">
+            <img src="src/img/resep.png" alt="Rekomendasi Resep Makanan" class="project-image transition duration-300">
+
+            <div class="project-content text-white">
+                <h3 class="project-title">Resep.io</h3>
+
+                <div class="project-tech">
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Flask</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Bootstrap</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Python</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">TF-IDF</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Pandas</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Scikit-learn</span>
+                </div>
+
+                <p class="project-description">
+                    Website rekomendasi resep makanan berbasis Machine Learning menggunakan algoritma TF-IDF.
+                </p>
+
+                <div class="project-actions">
+                    <a href="/project/detail-resep.html" class="detail-btn w-full bg-gray-700 text-white py-2 rounded-full hover:bg-gray-200 text-center hover:text-gray-600 ease-in-out duration-300 transition" data-id="4">Detail</a>
+                    <a href="https://github.com/sahrulamriii/Rekomendasi-Resep" target="_blank" rel="noopener noreferrer" class="block text-center bg-white text-black py-2 rounded-full font-medium hover:bg-gray-300 transition">GitHub</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= CARD 4 ================= -->
+    <div class="swiper-slide" data-category="fullstack" data-id="4">
+        <div class="project-card bg-[#1E1E1E] rounded-2xl overflow-hidden border border-gray-700 shadow-lg transition duration-300 hover:-translate-y-2 hover:shadow-2xl">
+            <img src="src/img/sq.png" alt="Science Quest" class="project-image transition duration-300">
+
+            <div class="project-content text-white">
+                <h3 class="project-title">Science Quest</h3>
+
+                <div class="project-tech">
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Laravel</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">TailwindCSS</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">MySQL</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">React JS</span>
+                </div>
+
+                <p class="project-description">
+                    Website belajar berbasis game yang menyajikan ilmu pengetahuan melalui permainan interaktif.
+                </p>
+
+                <div class="project-actions">
+                    <a href="/project/detail-sq.html" class="detail-btn w-full bg-gray-700 text-white py-2 rounded-full hover:bg-gray-200 text-center hover:text-gray-600 ease-in-out duration-300 transition" data-id="4">Detail</a>
+                    <a href="https://github.com/Science-Quest/Web" target="_blank" rel="noopener noreferrer" class="block text-center bg-white text-black py-2 rounded-full font-medium hover:bg-gray-300 transition">GitHub</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= CARD 5 ================= -->
+    <div class="swiper-slide" data-category="fullstack" data-id="5">
+        <div class="project-card bg-[#1E1E1E] rounded-2xl overflow-hidden border border-gray-700 shadow-lg transition duration-300 hover:-translate-y-2 hover:shadow-2xl">
+            <img src="src/img/evermos1.png" alt="Evermos REST API" class="project-image transition duration-300">
+
+            <div class="project-content text-white">
+                <h3 class="project-title">Evermos E-Commerce REST API</h3>
+
+                <div class="project-tech">
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Golang</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">MySQL</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">JWT Auth</span>
+                </div>
+
+                <p class="project-description">
+                    REST API untuk E-Commerce Evermos yang dibangun menggunakan Golang, GORM, dan MySQL.
+                </p>
+
+                <div class="project-actions">
+                    <a href="/project/detail-evermos.html" class="detail-btn w-full bg-gray-700 text-white py-2 rounded-full hover:bg-gray-200 text-center hover:text-gray-600 ease-in-out duration-300 transition" data-id="4">Detail</a>
+                    <a href="https://github.com/Science-Quest/Web" target="_blank" rel="noopener noreferrer" class="block text-center bg-white text-black py-2 rounded-full font-medium hover:bg-gray-300 transition">GitHub</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= CARD 6 ================= -->
+    <div class="swiper-slide" data-category="fullstack" data-id="6">
+        <div class="project-card bg-[#1E1E1E] rounded-2xl overflow-hidden border border-gray-700 shadow-lg transition duration-300 hover:-translate-y-2 hover:shadow-2xl">
+            <img src="src/img/easyadmin.png" alt="EasyAdmin" class="project-image transition duration-300">
+
+            <div class="project-content text-white">
+                <h3 class="project-title">EasyAdmin</h3>
+
+                <div class="project-tech">
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Laravel</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">MySQL</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">SQL Server</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">PostgreSQL</span>
+                </div>
+
+                <p class="project-description">
+                    Aplikasi ini dapat digunakan untuk mengelola data dari gabungan beberapa jenis database seperti MySQL, SQL Server, dan PostgreSQL.
+                </p>
+
+                <div class="project-actions">
+                    <a href="/project/detail-easyadmin.html" class="detail-btn w-full bg-gray-700 text-white py-2 rounded-full hover:bg-gray-200 text-center hover:text-gray-600 ease-in-out duration-300 transition" data-id="4">Detail</a>
+                    <a href="https://github.com/Sahrulamri/easyAdmin" target="_blank" rel="noopener noreferrer" class="block text-center bg-white text-black py-2 rounded-full font-medium hover:bg-gray-300 transition">GitHub</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= CARD 7 ================= -->
+    <div class="swiper-slide" data-category="fullstack" data-id="7">
+        <div class="project-card bg-[#1E1E1E] rounded-2xl overflow-hidden border border-gray-700 shadow-lg transition duration-300 hover:-translate-y-2 hover:shadow-2xl">
+            <img src="src/img/projects/ppko/ppko1.png" alt="ppko-hmti-2024" class="project-image transition duration-300">
+
+            <div class="project-content text-white">
+                <h3 class="project-title">System Design & LMS Administration Team Member PPKO HMTI 2024</h3>
+
+                <div class="project-tech">
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Draw.io</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Figma</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Canvas</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">GDocs</span>
+                </div>
+
+                <p class="project-description">
+                    Merancang arsitektur sistem (ERD, use case, user flow) dan mengelola operasional LMS untuk program Sekolah Perempuan Kreatif Batursari (PPK Ormawa HMTI UDINUS 2024).
+                </p>
+
+                <div class="project-actions">
+                    <a href="/project/ppko.html" class="detail-btn w-full bg-gray-700 text-white py-2 rounded-full hover:bg-gray-200 text-center hover:text-gray-600 ease-in-out duration-300 transition" data-id="4">Detail</a>
+                    <a href="https://docs.google.com/document/d/16-DWq6QLIoNeonzNTOPVE6zyxH9d1Gb8vFrzA2ygHlU/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="block text-center bg-white text-black py-2 rounded-full font-medium hover:bg-gray-300 transition">Docs</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= CARD 8 ================= -->
+    <div class="swiper-slide" data-category="data" data-id="8">
+        <div class="project-card bg-[#1E1E1E] rounded-2xl overflow-hidden border border-gray-700 shadow-lg transition duration-300 hover:-translate-y-2 hover:shadow-2xl">
+            <img src="src/img/projects/etl-pipeline/etl0.png" alt="etl-pipeline" class="project-image transition duration-300">
+
+            <div class="project-content text-white">
+                <h3 class="project-title">ETL Pipeline Data Engineering</h3>
+
+                <div class="project-tech">
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Python</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Docker</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">PostgreSQL</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Apache Airflow</span>
+                </div>
+
+                <p class="project-description">
+                    Proyek ini merupakan implementasi pipeline ETL (Extract, Transform, Load) end-to-end yang mengotomatisasi pengambilan data buku bertema Data Engineering dari Open Library API menggunakan Python.
+                </p>
+
+                <div class="project-actions">
+                    <a href="/project/etl-pipeline.html" class="detail-btn w-full bg-gray-700 text-white py-2 rounded-full hover:bg-gray-200 text-center hover:text-gray-600 ease-in-out duration-300 transition" data-id="4">Detail</a>
+                    <a href="https://github.com/Sahrulamri/etl-data-engineer.git" target="_blank" rel="noopener noreferrer" class="block text-center bg-white text-black py-2 rounded-full font-medium hover:bg-gray-300 transition">GitHub</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= CARD 9 ================= -->
+    <div class="swiper-slide" data-category="data" data-id="9">
+        <div class="project-card bg-[#1E1E1E] rounded-2xl overflow-hidden border border-gray-700 shadow-lg transition duration-300 hover:-translate-y-2 hover:shadow-2xl">
+            <img src="src/img/projects/elt-pipeline/elt1.png" alt="elt-pipeline" class="project-image transition duration-300">
+
+            <div class="project-content text-white">
+                <h3 class="project-title">ELT Pipeline Data Engineering</h3>
+
+                <div class="project-tech">
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Python</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Docker</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">PostgreSQL</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Apache Airflow</span>
+                </div>
+
+                <p class="project-description">
+                    Proyek ini merupakan implementasi data pipeline berarsitektur ELT (Extract, Load, Transform) end-to-end yang mengotomatisasi migrasi data operasional dari database sumber (source PostgreSQL) ke destination database.
+                </p>
+
+                <div class="project-actions">
+                    <a href="/project/elt-pipeline.html" class="detail-btn w-full bg-gray-700 text-white py-2 rounded-full hover:bg-gray-200 text-center hover:text-gray-600 ease-in-out duration-300 transition" data-id="9">Detail</a>
+                    <a href="https://github.com/Sahrulamri/elt-pipeline.git" target="_blank" rel="noopener noreferrer" class="block text-center bg-white text-black py-2 rounded-full font-medium hover:bg-gray-300 transition">GitHub</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= CARD 10 ================= -->
+    <div class="swiper-slide" data-category="data" data-id="10">
+        <div class="project-card bg-[#1E1E1E] rounded-2xl overflow-hidden border border-gray-700 shadow-lg transition duration-300 hover:-translate-y-2 hover:shadow-2xl">
+            <img src="src/img/projects/ta/ta1.png" alt="optimasi inhibisi korosi" class="project-image transition duration-300">
+
+            <div class="project-content text-white">
+                <h3 class="project-title">Optimasi Prediksi Efisiensi Inhibisi Korosi</h3>
+
+                <div class="project-tech">
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Python</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Jupyter Notebook</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Gradient Boosting</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Augmentasi GMM</span>
+                </div>
+
+                <p class="project-description">
+                    Proyek penelitian ini berfokus pada pengembangan kerangka kerja pemodelan Quantitative Structure-Property Relationship (QSPR) untuk memprediksi efisiensi inhibisi korosi (IE %) pada senyawa turunan piridazin.
+                </p>
+
+                <div class="project-actions">
+                    <a href="/project/ta.html" class="detail-btn w-full bg-gray-700 text-white py-2 rounded-full hover:bg-gray-200 text-center hover:text-gray-600 ease-in-out duration-300 transition" data-id="10">Detail</a>
+                    <a href="https://drive.google.com/file/d/1B4qqJH1tbW9IEJ4auInF-mmeX0BDwVyh/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="block text-center bg-white text-black py-2 rounded-full font-medium hover:bg-gray-300 transition">Docs</a>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- ================= CARD 11 ================= -->
+    <div class="swiper-slide" data-category="data" data-id="11">
+        <div class="project-card bg-[#1E1E1E] rounded-2xl overflow-hidden border border-gray-700 shadow-lg transition duration-300 hover:-translate-y-2 hover:shadow-2xl">
+            <img src="src/img/projects/sentimenAnalisisCovid19/1.png" alt="Analisis Sentimen PPKM" class="project-image transition duration-300">
+
+            <div class="project-content text-white">
+                <h3 class="project-title">Analisis Sentimen Masyarakat terhadap Kebijakan PPKM di Indonesia Menggunakan Klasifikasi Teks & Penanganan Imbalance Data (SMOTE)</h3>
+
+                <div class="project-tech">
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Python</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Jupyter Notebook</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">SMOTE</span>
+                </div>
+
+                <p class="project-description">
+                    Proyek penelitian ini berfokus Membangun model klasifikasi teks untuk mengkategorikan sentimen masyarakat terhadap kebijakan PPKM ke dalam tiga kelas: Negatif, Netral, dan Positif.
+                </p>
+
+                <div class="project-actions">
+                    <a href="/project/sentimenAnalisisCovid19.html" class="detail-btn w-full bg-gray-700 text-white py-2 rounded-full hover:bg-gray-200 text-center hover:text-gray-600 ease-in-out duration-300 transition" data-id="11">Detail</a>
+                    <a href="https://drive.google.com/file/d/1-7rbVA-ZEyOsBYTDfuTfYEED3ulBzQwX/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="block text-center bg-white text-black py-2 rounded-full font-medium hover:bg-gray-300 transition">Docs</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= CARD 12 ================= -->
+    <div class="swiper-slide" data-category="data" data-id="12">
+        <div class="project-card bg-[#1E1E1E] rounded-2xl overflow-hidden border border-gray-700 shadow-lg transition duration-300 hover:-translate-y-2 hover:shadow-2xl">
+            <img src="src/img/projects/employee/8.png" alt="Prediksi Employee Attrition" class="project-image transition duration-300">
+
+            <div class="project-content text-white">
+                <h3 class="project-title">Prediksi Employee Attrition (Pengunduran Diri Karyawan) di Arab Saudi Menggunakan Machine Learning & Penanganan Outlier Berbasis Domain-Driven</h3>
+
+                <div class="project-tech">
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Python</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Numpy</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Pandas</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Matplotlib</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Seaborn</span>
+                </div>
+
+                <p class="project-description">
+                    Proyek ini membangun sistem pemodelan prediktif end-to-end untuk mengidentifikasi potensi employee attrition (karyawan keluar/resign) pada perusahaan di Arab Saudi.
+                </p>
+
+                <div class="project-actions">
+                    <a href="/project/employee.html" class="detail-btn w-full bg-gray-700 text-white py-2 rounded-full hover:bg-gray-200 text-center hover:text-gray-600 ease-in-out duration-300 transition" data-id="12">Detail</a>
+                    <a href="https://colab.research.google.com/drive/1YWC3TyrCqMUyw10h8A9cE4lni9dhd85T?usp=sharing" target="_blank" rel="noopener noreferrer" class="block text-center bg-white text-black py-2 rounded-full font-medium hover:bg-gray-300 transition">Colab</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= CARD 13 ================= -->
+    <div class="swiper-slide" data-category="data" data-id="13">
+        <div class="project-card bg-[#1E1E1E] rounded-2xl overflow-hidden border border-gray-700 shadow-lg transition duration-300 hover:-translate-y-2 hover:shadow-2xl">
+            <img src="src/img/projects/diabetes/1.png" alt="Klasifikasi Risiko Diabetes" class="project-image transition duration-300">
+
+            <div class="project-content text-white">
+                <h3 class="project-title">Klasifikasi Prediksi Risiko Diabetes Menggunakan Machine Learning dan Advanced Feature Engineering Berbasis Ensemble Model (XGBoost & LightGBM)</h3>
+
+                <div class="project-tech">
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Python</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Numpy</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Pandas</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Matplotlib</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Seaborn</span>
+                </div>
+
+                <p class="project-description">
+                    Proyek ini membangun sistem klasifikasi medis berbasis machine learning end-to-end untuk mendeteksi dini risiko penyakit diabetes pada pasien.
+                </p>
+
+                <div class="project-actions">
+                    <a href="/project/diabetes.html" class="detail-btn w-full bg-gray-700 text-white py-2 rounded-full hover:bg-gray-200 text-center hover:text-gray-600 ease-in-out duration-300 transition" data-id="13">Detail</a>
+                    <a href="https://colab.research.google.com/drive/1Lp6tMxrJ9TJTpqrhABx1oh-KjheuFE74?usp=sharing" target="_blank" rel="noopener noreferrer" class="block text-center bg-white text-black py-2 rounded-full font-medium hover:bg-gray-300 transition">Colab</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= CARD 14 ================= -->
+    <div class="swiper-slide" data-category="data" data-id="14">
+        <div class="project-card bg-[#1E1E1E] rounded-2xl overflow-hidden border border-gray-700 shadow-lg transition duration-300 hover:-translate-y-2 hover:shadow-2xl">
+            <img src="src/img/projects/bank/10.png" alt="Prediksi Deposito Berjangka" class="project-image transition duration-300">
+
+            <div class="project-content text-white">
+                <h3 class="project-title">Klasifikasi Prediksi Keputusan Langganan Deposito Berjangka Nasabah Bank Menggunakan Machine Learning dan Penanganan Class Imbalance Berbasis SMOTE</h3>
+
+                <div class="project-tech">
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Python</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Numpy</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Pandas</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Matplotlib</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Seaborn</span>
+                </div>
+
+                <p class="project-description">
+                    Mengidentifikasi apakah seorang nasabah bank akan berlangganan produk deposito berjangka (term deposit) berdasarkan kampanye pemasaran telepon.
+                </p>
+
+                <div class="project-actions">
+                    <a href="/project/bank.html" class="detail-btn w-full bg-gray-700 text-white py-2 rounded-full hover:bg-gray-200 text-center hover:text-gray-600 ease-in-out duration-300 transition" data-id="14">Detail</a>
+                    <a href="https://drive.google.com/file/d/1iZXs5shKJb6ZrFFAIEECfTj7rLklCO4R/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="block text-center bg-white text-black py-2 rounded-full font-medium hover:bg-gray-300 transition">Colab</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= CARD 15 ================= -->
+    <div class="swiper-slide" data-category="data" data-id="15">
+        <div class="project-card bg-[#1E1E1E] rounded-2xl overflow-hidden border border-gray-700 shadow-lg transition duration-300 hover:-translate-y-2 hover:shadow-2xl">
+            <img src="src/img/projects/gagal-jantung/13.png" alt="Risiko Gagal Jantung" class="project-image transition duration-300">
+
+            <div class="project-content text-white">
+                <h3 class="project-title">Klasifikasi Prediksi Risiko Kematian Pasien Gagal Jantung Menggunakan Machine Learning Berbasis Rekam Medis Klinis</h3>
+
+                <div class="project-tech">
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Python</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Numpy</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Pandas</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Matplotlib</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Seaborn</span>
+                </div>
+
+                <p class="project-description">
+                    Mengidentifikasi tingkat risiko kelangsungan hidup pasien yang mengalami gagal jantung berdasarkan rekam medis klinis.
+                </p>
+
+                <div class="project-actions">
+                    <a href="/project/gagal-jantung.html" class="detail-btn w-full bg-gray-700 text-white py-2 rounded-full hover:bg-gray-200 text-center hover:text-gray-600 ease-in-out duration-300 transition" data-id="15">Detail</a>
+                    <a href="https://colab.research.google.com/drive/1J4B9cgx8NGWM88I2MbS0qKCtS1G9u2CD?usp=sharing" target="_blank" rel="noopener noreferrer" class="block text-center bg-white text-black py-2 rounded-full font-medium hover:bg-gray-300 transition">Colab</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= CARD 16 ================= -->
+    <div class="swiper-slide" data-category="data" data-id="16">
+        <div class="project-card bg-[#1E1E1E] rounded-2xl overflow-hidden border border-gray-700 shadow-lg transition duration-300 hover:-translate-y-2 hover:shadow-2xl">
+            <img src="src/img/projects/restoran/1.png" alt="RAG Restaurant Review Assistant" class="project-image transition duration-300">
+
+            <div class="project-content text-white">
+                <h3 class="project-title">RAG-Based Intelligent Restaurant Review Assistant</h3>
+
+                <div class="project-tech">
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Python</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">LangChain</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Ollama</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">mxbai-embed-large</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">ChromaDB</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Pandas</span>
+                </div>
+
+                <p class="project-description">
+                    Asisten ulasan restoran berbasis AI yang menggunakan pendekatan Retrieval-Augmented Generation (RAG) untuk mengambil informasi relevan dari database ulasan dan menghasilkan jawaban menggunakan Large Language Model (LLM).
+                </p>
+
+                <div class="project-actions">
+                    <a href="/project/restoran.html" class="detail-btn w-full bg-gray-700 text-white py-2 rounded-full hover:bg-gray-200 text-center hover:text-gray-600 ease-in-out duration-300 transition" data-id="16">Detail</a>
+                    <a href="https://github.com/Sahrulamri/chatbot-RAG.git" target="_blank" rel="noopener noreferrer" class="block text-center bg-white text-black py-2 rounded-full font-medium hover:bg-gray-300 transition">GitHub</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ================= CARD 17 ================= -->
+    <div class="swiper-slide" data-category="data" data-id="17">
+        <div class="project-card bg-[#1E1E1E] rounded-2xl overflow-hidden border border-gray-700 shadow-lg transition duration-300 hover:-translate-y-2 hover:shadow-2xl">
+            <img src="src/img/projects/sampah-plastik/11.png" alt="Plastic Waste Detection and Classification" class="project-image transition duration-300">
+
+            <div class="project-content text-white">
+                <h3 class="project-title">Deteksi & Klasifikasi Sampah Plastik Cerdas Menggunakan State-of-the-Art Deep Learning YOLOv8</h3>
+
+                <div class="project-tech">
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Python</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Ultralytics YOLOv8</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Roboflow</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Jupyter Notebook</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">OpenCV</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Matplotlib</span>
+                </div>
+
+                <p class="project-description">
+                    Proyek ini membangun sistem kecerdasan buatan berbasis computer vision menggunakan algoritma YOLOv8 untuk mendeteksi dan mengklasifikasikan sampah plastik secara otomatis.
+                </p>
+
+                <div class="project-actions">
+                    <a href="/project/sampah-plastik.html" class="detail-btn w-full bg-gray-700 text-white py-2 rounded-full hover:bg-gray-200 text-center hover:text-gray-600 ease-in-out duration-300 transition" data-id="17">Detail</a>
+                    <a href="https://drive.google.com/file/d/163sBL5HxqsPa5jgl0TwSRBeJv0Wpc1-W/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="block text-center bg-white text-black py-2 rounded-full font-medium hover:bg-gray-300 transition">Docs</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ================= CARD 18 ================= -->
+    <div class="swiper-slide" data-category="data" data-id="18">
+        <div class="project-card bg-[#1E1E1E] rounded-2xl overflow-hidden border border-gray-700 shadow-lg transition duration-300 hover:-translate-y-2 hover:shadow-2xl">
+            <img src="src/img/projects/plat/1.png" alt="Plastic Waste Detection and Classification" class="project-image transition duration-300">
+
+            <div class="project-content text-white">
+                <h3 class="project-title">Deteksi Plat Nomor Kendaraan dan Ekstraksi Teks (OCR) Otomatis di Lampu Merah Menggunakan YOLOv8</h3>
+
+                <div class="project-tech">
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Python</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Ultralytics YOLOv8</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Roboflow</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">OpenCV (cv2)</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Gaussian Blur</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">OCR</span>
+                </div>
+
+                <p class="project-description">
+                    Mengembangkan model cerdas berbasis computer vision untuk mendeteksi dan mengenali plat nomor kendaraan secara otomatis dari rekaman visual/cctv di area lampu merah.
+                </p>
+
+                <div class="project-actions">
+                    <a href="/project/plat.html" class="detail-btn w-full bg-gray-700 text-white py-2 rounded-full hover:bg-gray-200 text-center hover:text-gray-600 ease-in-out duration-300 transition" data-id="17">Detail</a>
+                    <a href="https://canva.link/aha4odrnof57kzc" target="_blank" rel="noopener noreferrer" class="block text-center bg-white text-black py-2 rounded-full font-medium hover:bg-gray-300 transition">Dokumentasi</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ================= CARD 19 ================= -->
+    <div class="swiper-slide" data-category="data" data-id="19">
+        <div class="project-card bg-[#1E1E1E] rounded-2xl overflow-hidden border border-gray-700 shadow-lg transition duration-300 hover:-translate-y-2 hover:shadow-2xl">
+            <img src="src/img/projects/kentang/7.png" alt="Plastic Waste Detection and Classification" class="project-image transition duration-300">
+
+            <div class="project-content text-white">
+                <h3 class="project-title">Sistem Klasifikasi Dini Penyakit Daun Kentang (Sehat, Hawar Muda, Hawar Tua) Menggunakan Hybrid InceptionV3 dan Support Vector Machine (SVM)</h3>
+
+                <div class="project-tech">
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Python</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">PyTorch</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">InceptionV3</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Support Vector Machine (SVM))</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Streamlit</span>
+                </div>
+
+                <p class="project-description">
+                    Proyek ini membangun sistem kecerdasan buatan hibrida (hybrid model) yang menggabungkan kekuatan ekstraksi fitur citra dari jaringan saraf tiruan InceptionV3 dengan algoritma klasifikasi Support Vector Machine (SVM).
+                </p>
+
+                <div class="project-actions">
+                    <a href="/project/kentang.html" class="detail-btn w-full bg-gray-700 text-white py-2 rounded-full hover:bg-gray-200 text-center hover:text-gray-600 ease-in-out duration-300 transition" data-id="17">Detail</a>
+                    <a href="https://canva.link/aha4odrnof57kzc" target="_blank" rel="noopener noreferrer" class="block text-center bg-white text-black py-2 rounded-full font-medium hover:bg-gray-300 transition">Dokumentasi</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ================= CARD 20 ================= -->
+    <div class="swiper-slide" data-category="data" data-id="20">
+        <div class="project-card bg-[#1E1E1E] rounded-2xl overflow-hidden border border-gray-700 shadow-lg transition duration-300 hover:-translate-y-2 hover:shadow-2xl">
+            <img src="src/img/projects/wajah/1.png" alt="Plastic Waste Detection and Classification" class="project-image transition duration-300">
+
+            <div class="project-content text-white">
+                <h3 class="project-title">Comparative Analysis of Face Detection and Image Processing Systems Using OpenCV and MTCNN Models</h3>
+
+                <div class="project-tech">
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Python</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">OpenCV</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">MTCNN</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Gaussian Blur</span>
+                    <span class="px-3 py-1 text-xs font-medium bg-white text-black rounded-md inline-block">Histogram Equalization</span>
+                </div>
+
+                <p class="project-description">
+                    Proyek ini melakukan analisis komparatif mendalam terhadap performa sistem deteksi wajah menggunakan metode konvensional berbasis pustaka OpenCV dan pendekatan Deep Learning modern MTCNN.
+                </p>
+
+                <div class="project-actions">
+                    <a href="/project/wajah.html" class="detail-btn w-full bg-gray-700 text-white py-2 rounded-full hover:bg-gray-200 text-center hover:text-gray-600 ease-in-out duration-300 transition" data-id="17">Detail</a>
+                    <a href="https://github.com/sahrulamriii/FaceDetection.git" target="_blank" rel="noopener noreferrer" class="block text-center bg-white text-black py-2 rounded-full font-medium hover:bg-gray-300 transition">Github</a>
+                </div>
+            </div>
+        </div>
+    </div>
+            </div>
+              
+                        <div class="project-pagination mt-10 flex justify-center items-center gap-2 w-full"></div>
+
+        </div>
+        <!-- Penutup Swiper -->
+
+        <!-- Tombol Next -->
+        <button id="nextBtn"
+            class="shrink-0 w-12 h-12 rounded-full bg-white text-black shadow-lg hover:bg-black hover:text-white transition hidden md:flex items-center justify-center">
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
+
+    </div>
+    <!-- Penutup flex container -->
+
+</div>
+<!-- Penutup carousel container -->
+</section>
+
+<!-- ========================================== -->
+<!-- CERTIFICATE SECTION -->
+<!-- ========================================== -->
+
+<section
+    id="certificates"
+    class="py-16 md:py-20 overflow-hidden text-white
+           relative z-0
+           bg-gradient-to-b from-[#1E1E1E] via-[#151515] to-black"
+>
+    <div class="max-w-7xl mx-auto px-4 text-center mb-8 md:mb-10">
+        <p class="text-xs sm:text-sm uppercase tracking-[0.3em] text-gray-300 mb-3">
+            My Achievements
+        </p>
+
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight">
+            Certificates I've
+            <span class="text-gray-300">Obtained</span>
+        </h2>
+
+        <p class="mt-3 text-sm sm:text-base text-gray-200">
+            A collection of courses and certifications I've completed.
+        </p>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="swiper certificateSwiper">
+            <div class="swiper-wrapper">
+
+                <!-- Certificate 1 -->
+                <div
+                    class="swiper-slide !w-[320px] sm:!w-[440px] md:!w-[520px] cursor-zoom-in"
+                    onclick="openModal('src/img/sertifikat/1.png')"
+                >
+                    <div class="certificate-card">
+                        <img
+                            src="src/img/sertifikat/1.png"
+                            alt="Certificate 1"
+                            loading="lazy"
+                        >
+                        
+                    </div>
+                </div>
+
+                <!-- Certificate 2 -->
+                <div
+                    class="swiper-slide !w-[320px] sm:!w-[440px] md:!w-[520px] cursor-zoom-in"
+                    onclick="openModal('src/img/sertifikat/2.png')"
+                >
+                    <div class="certificate-card">
+                        <img
+                            src="src/img/sertifikat/2.png"
+                            alt="Certificate 2"
+                            loading="lazy"
+                        >
+                      
+                    </div>
+                </div>
+
+                <!-- Certificate 3 -->
+                <div
+                    class="swiper-slide !w-[320px] sm:!w-[440px] md:!w-[520px] cursor-zoom-in"
+                    onclick="openModal('src/img/sertifikat/3.png')"
+                >
+                    <div class="certificate-card">
+                        <img
+                            src="src/img/sertifikat/3.png"
+                            alt="Certificate 3"
+                            loading="lazy"
+                        >
+                      
+                    </div>
+                </div>
+                <!-- Certificate 4 -->
+                <div
+                    class="swiper-slide !w-[320px] sm:!w-[440px] md:!w-[520px] cursor-zoom-in"
+                    onclick="openModal('src/img/sertifikat/4.png')"
+                >
+                    <div class="certificate-card">
+                        <img
+                            src="src/img/sertifikat/4.png"
+                            alt="Certificate 4"
+                            loading="lazy"
+                        >
+                      
+                    </div>
+                </div>
+                <!-- Certificate 5 -->
+                <div
+                    class="swiper-slide !w-[320px] sm:!w-[440px] md:!w-[520px] cursor-zoom-in"
+                    onclick="openModal('src/img/sertifikat/5.png')"
+                >
+                    <div class="certificate-card">
+                        <img
+                            src="src/img/sertifikat/5.png"
+                            alt="Certificate 5"
+                            loading="lazy"
+                        >
+                      
+                    </div>
+                </div>
+                <!-- Certificate 6 -->
+                <div
+                    class="swiper-slide !w-[320px] sm:!w-[440px] md:!w-[520px] cursor-zoom-in"
+                    onclick="openModal('src/img/sertifikat/6.png')"
+                >
+                    <div class="certificate-card">
+                        <img
+                            src="src/img/sertifikat/6.png"
+                            alt="Certificate 6"
+                            loading="lazy"
+                        >
+                      
+                    </div>
+                </div>
+                <!-- Certificate 7 -->
+                <div
+                    class="swiper-slide !w-[320px] sm:!w-[440px] md:!w-[520px] cursor-zoom-in"
+                    onclick="openModal('src/img/sertifikat/7.png')"
+                >
+                    <div class="certificate-card">
+                        <img
+                            src="src/img/sertifikat/7.png"
+                            alt="Certificate 6"
+                            loading="lazy"
+                        >
+                      
+                    </div>
+                </div>
+                <!-- Certificate 8 -->
+                <div
+                    class="swiper-slide !w-[320px] sm:!w-[440px] md:!w-[520px] cursor-zoom-in"
+                    onclick="openModal('src/img/sertifikat/8.png')"
+                >
+                    <div class="certificate-card">
+                        <img
+                            src="src/img/sertifikat/8.png"
+                            alt="Certificate 8"
+                            loading="lazy"
+                        >
+                      
+                    </div>
+                </div>
+                <!-- Certificate 9 -->
+                <div
+                    class="swiper-slide !w-[320px] sm:!w-[440px] md:!w-[520px] cursor-zoom-in"
+                    onclick="openModal('src/img/sertifikat/9.png')"
+                >
+                    <div class="certificate-card">
+                        <img
+                            src="src/img/sertifikat/9.png"
+                            alt="Certificate 9"
+                            loading="lazy"
+                        >
+                      
+                    </div>
+                </div>
+                <!-- Certificate 10 -->
+                <div
+                    class="swiper-slide !w-[320px] sm:!w-[440px] md:!w-[520px] cursor-zoom-in"
+                    onclick="openModal('src/img/sertifikat/10.png')"
+                >
+                    <div class="certificate-card">
+                        <img
+                            src="src/img/sertifikat/10.png"
+                            alt="Certificate 10"
+                            loading="lazy"
+                        >
+                      
+                    </div>
+                </div>
+                <!-- Certificate 11 -->
+                <div
+                    class="swiper-slide !w-[320px] sm:!w-[440px] md:!w-[520px] cursor-zoom-in"
+                    onclick="openModal('src/img/sertifikat/11.png')"
+                >
+                    <div class="certificate-card">
+                        <img
+                            src="src/img/sertifikat/11.png"
+                            alt="Certificate 11"
+                            loading="lazy"
+                        >
+                      
+                    </div>
+                </div>
+                <!-- Certificate 12 -->
+                <div
+                    class="swiper-slide !w-[320px] sm:!w-[440px] md:!w-[520px] cursor-zoom-in"
+                    onclick="openModal('src/img/sertifikat/12.png')"
+                >
+                    <div class="certificate-card">
+                        <img
+                            src="src/img/sertifikat/12.png"
+                            alt="Certificate 12"
+                            loading="lazy"
+                        >
+                      
+                    </div>
+                </div>
+                <!-- Certificate 13 -->
+                <div
+                    class="swiper-slide !w-[320px] sm:!w-[440px] md:!w-[520px] cursor-zoom-in"
+                    onclick="openModal('src/img/sertifikat/13.png')"
+                >
+                    <div class="certificate-card">
+                        <img
+                            src="src/img/sertifikat/13.png"
+                            alt="Certificate 13"
+                            loading="lazy"
+                        >
+                      
+                    </div>
+                </div>
+                <!-- Certificate 14 -->
+                <div
+                    class="swiper-slide !w-[320px] sm:!w-[440px] md:!w-[520px] cursor-zoom-in"
+                    onclick="openModal('src/img/sertifikat/14.png')"
+                >
+                    <div class="certificate-card">
+                        <img
+                            src="src/img/sertifikat/14.png"
+                            alt="Certificate 14"
+                            loading="lazy"
+                        >
+                      
+                    </div>
+                </div>
+                <!-- Certificate 15 -->
+                <div
+                    class="swiper-slide !w-[320px] sm:!w-[440px] md:!w-[520px] cursor-zoom-in"
+                    onclick="openModal('src/img/sertifikat/15.png')"
+                >
+                    <div class="certificate-card">
+                        <img
+                            src="src/img/sertifikat/15.png"
+                            alt="Certificate 15"
+                            loading="lazy"
+                        >
+                      
+                    </div>
+                </div>
+                <!-- Certificate 16 -->
+                <div
+                    class="swiper-slide !w-[320px] sm:!w-[440px] md:!w-[520px] cursor-zoom-in"
+                    onclick="openModal('src/img/sertifikat/16.png')"
+                >
+                    <div class="certificate-card">
+                        <img
+                            src="src/img/sertifikat/16.png"
+                            alt="Certificate 16"
+                            loading="lazy"
+                        >
+                      
+                    </div>
+                </div>
+                <!-- Certificate 17 -->
+                <div
+                    class="swiper-slide !w-[320px] sm:!w-[440px] md:!w-[520px] cursor-zoom-in"
+                    onclick="openModal('src/img/sertifikat/17.png')"
+                >
+                    <div class="certificate-card">
+                        <img
+                            src="src/img/sertifikat/17.png"
+                            alt="Certificate 17"
+                            loading="lazy"
+                        >
+                      
+                    </div>
+                </div>
+                <!-- Certificate 18 -->
+                <div
+                    class="swiper-slide !w-[320px] sm:!w-[440px] md:!w-[520px] cursor-zoom-in"
+                    onclick="openModal('src/img/sertifikat/18.png')"
+                >
+                    <div class="certificate-card">
+                        <img
+                            src="src/img/sertifikat/18.png"
+                            alt="Certificate 18"
+                            loading="lazy"
+                        >
+                      
+                    </div>
+                </div>
+                <!-- Certificate 19 -->
+                <div
+                    class="swiper-slide !w-[320px] sm:!w-[440px] md:!w-[520px] cursor-zoom-in"
+                    onclick="openModal('src/img/sertifikat/19.png')"
+                >
+                    <div class="certificate-card">
+                        <img
+                            src="src/img/sertifikat/19.png"
+                            alt="Certificate 19"
+                            loading="lazy"
+                        >
+                      
+                    </div>
+                </div>
+                <!-- Certificate 20 -->
+                <div
+                    class="swiper-slide !w-[320px] sm:!w-[440px] md:!w-[520px] cursor-zoom-in"
+                    onclick="openModal('src/img/sertifikat/20.png')"
+                >
+                    <div class="certificate-card">
+                        <img
+                            src="src/img/sertifikat/20.png"
+                            alt="Certificate 20"
+                            loading="lazy"
+                        >
+                      
+                    </div>
+                </div>
+                <!-- Certificate 21 -->
+                <div
+                    class="swiper-slide !w-[320px] sm:!w-[440px] md:!w-[520px] cursor-zoom-in"
+                    onclick="openModal('src/img/sertifikat/21.png')"
+                >
+                    <div class="certificate-card">
+                        <img
+                            src="src/img/sertifikat/21.png"
+                            alt="Certificate 21"
+                            loading="lazy"
+                        >
+                      
+                    </div>
+                </div>
+                <!-- Certificate 22 -->
+                <div
+                    class="swiper-slide !w-[320px] sm:!w-[440px] md:!w-[520px] cursor-zoom-in"
+                    onclick="openModal('src/img/sertifikat/22.png')"
+                >
+                    <div class="certificate-card">
+                        <img
+                            src="src/img/sertifikat/22.png"
+                            alt="Certificate 22"
+                            loading="lazy"
+                        >
+                      
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Contact Section -->
+<section id="contact" class="w-full bg-gradient-to-b from-black via-gray-600 to-white py-16 flex flex-col items-center">
+  <h2 class="text-3xl font-bold text-white mb-8">Contact</h2>
+
+  <div class="w-full max-w-lg bg-white rounded-xl shadow-xl p-8">
+    <form action="https://formspree.io/f/mvgwkbqn" method="POST" id="contactForm" class="space-y-5">
+      <!-- Nama -->
+      <div>
+        <label class="block font-semibold mb-1 text-stone-700">Nama</label>
+        <input type="text" name="nama" class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-gray-600" required>
+      </div>
+
+      <!-- Email -->
+      <div>
+        <label class="block font-semibold mb-1 text-stone-700">Email</label>
+        <input type="email" name="email" class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-gray-600" required>
+      </div>
+
+      <!-- Pesan -->
+      <div>
+        <label class="block font-semibold mb-1 text-stone-700">Pesan</label>
+        <textarea name="pesan" class="w-full border text-stone-700 border-gray-300 rounded-md p-2 h-32 resize-none focus:outline-none focus:ring-2 focus:ring-gray-600" required></textarea>
+      </div>
+
+      <!-- Button -->
+      <button type="submit" class="w-full bg-black text-white py-3 rounded-md font-semibold hover:bg-gray-800 transition">
+        Kirim
+      </button>
+    </form>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-white py-10 text-center">
+  <h3 class="text-xl font-bold text-gray-900">Sahrul Amri</h3>
+
+  <!-- Icons -->
+<div class="flex justify-center space-x-6 mt-4">
+  <!-- GitHub -->
+  <a href="https://github.com/Sahrulamri" target="_blank" class="text-gray-900 hover:text-gray-600 transition">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M12 0C5.37 0 0 5.373 0 12c0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 
+      0-.285-.01-1.04-.015-2.04-3.338.726-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.757-1.333-1.757-1.09-.745.083-.73.083-.73 
+      1.205.084 1.84 1.237 1.84 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.776.42-1.305.763-1.605-2.665-.305-5.466-1.332-5.466-5.93 
+      0-1.31.468-2.38 1.236-3.22-.124-.303-.536-1.524.117-3.176 0 0 1.008-.323 3.3 
+      1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.29-1.553 
+      3.296-1.23 3.296-1.23.655 1.653.243 2.874.12 3.176.77.84 1.235 1.91 1.235 
+      3.22 0 4.61-2.805 5.624-5.476 5.92.431.372.815 1.102.815 2.222 
+      0 1.606-.014 2.898-.014 3.293 0 .322.216.694.825.576C20.565 21.796 
+      24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+    </svg>
+  </a>
+
+  <!-- LinkedIn -->
+  <a href="www.linkedin.com/in/sahrul-amri-59022b216" target="_blank" class="text-gray-900 hover:text-gray-600 transition">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 
+      2.5S0 4.881 0 3.5 1.11 1 2.5 1s2.48 1.119 2.48 2.5zM.5 
+      8h4V24h-4V8zm7.5 0h3.8v2.2h.1c.5-.9 1.7-2.2 
+      3.6-2.2 3.8 0 4.5 2.4 4.5 5.5V24h-4v-7.8c0-1.9 
+      0-4.3-2.6-4.3s-3 2-3 4.1V24h-4V8z"/>
+    </svg>
+  </a>
+
+  <!-- Email -->
+  <a href="mailto:sahrulamri898@gmail.com" class="text-gray-900 hover:text-gray-600 transition">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M12 13.065L.005 6h23.99L12 13.065zm0 
+      2.275L0 8v12h24V8l-12 7.34z"/>
+    </svg>
+  </a>
+</div>
+
+
+  <!-- Copyright -->
+  <p class="text-gray-600 mt-6 text-sm">© 2026 All Rights Reserved</p>
+</footer>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+document.getElementById("contactForm").addEventListener("submit", async function(e) {
+  e.preventDefault(); // cegah reload
+
+  const form = e.target;
+  const formData = new FormData(form);
+
+  const response = await fetch("https://formspree.io/f/mvgwkbqn", {
+    method: "POST",
+    body: formData,
+    headers: { 'Accept': 'application/json' }
+  });
+
+  if (response.ok) {
+    Swal.fire({
+      title: "Berhasil!",
+      text: "Pesan kamu sudah terkirim 🙌",
+      icon: "success",
+      confirmButtonColor: "#000",
+    });
+    form.reset(); // kosongkan form setelah terkirim
+  } else {
+    Swal.fire({
+      title: "Gagal!",
+      text: "Terjadi kesalahan. Coba lagi ya 😢",
+      icon: "error",
+      confirmButtonColor: "#000",
+    });
+  }
+});
+
+// ================= TYPING EFFECT =================
+const words = [
+  "Software Developer",
+  "Web Developer",
+  "Data Scientist",
+  "Machine Learning Engineer",
+];
+
+let i = 0;
+let j = 0;
+let currentWord = "";
+let isDeleting = false;
+const speed = 100; // kecepatan ngetik
+const pause = 1500; // jeda setelah selesai ketik
+
+function type() {
+  currentWord = words[i];
+  
+  if (isDeleting) {
+    document.getElementById("typing").textContent = currentWord.substring(0, j--);
+  } else {
+    document.getElementById("typing").textContent = currentWord.substring(0, j++);
+  }
+
+  if (!isDeleting && j === currentWord.length + 1) {
+    isDeleting = true;
+    setTimeout(type, pause); // jeda sebelum hapus
+    return;
+  }
+
+  if (isDeleting && j === 0) {
+    isDeleting = false;
+    i = (i + 1) % words.length; // ganti kata selanjutnya
+  }
+
+  setTimeout(type, speed);
+}
+
+type();
+
+
+// ================= CV DROPDOWN =================
+const btn = document.getElementById("cvDropdownBtn");
+const menu = document.getElementById("cvDropdown");
+const chevron = document.getElementById("chevronIcon");
+
+btn.addEventListener("click", () => {
+    menu.classList.toggle("hidden");
+    chevron.classList.toggle("fa-chevron-down");
+    chevron.classList.toggle("fa-chevron-up");
+});
+
+// Klik di luar dropdown
+document.addEventListener("click", function (e) {
+    if (!btn.contains(e.target) && !menu.contains(e.target)) {
+        menu.classList.add("hidden");
+        chevron.classList.remove("fa-chevron-up");
+        chevron.classList.add("fa-chevron-down");
+    }
+});
+
+
+// ================= SWIPER SLIDER & FILTER PROJECT =================
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
+const filterButtons = document.querySelectorAll(".filter-btn");
+const swiperElement = document.querySelector(".projectSwiper");
+const swiperWrapper = swiperElement?.querySelector(".swiper-wrapper");
+const paginationElement = document.querySelector(".project-pagination");
+
+// Simpan slide asli agar filter dapat digunakan berulang kali.
+const originalSlidesHTML = swiperWrapper
+  ? Array.from(swiperWrapper.children).map(slide => slide.outerHTML)
+  : [];
+
+let swiper = null;
+
+function destroyProjectSwiper() {
+  if (swiper) {
+    swiper.destroy(true, true);
+    swiper = null;
+  }
+}
+
+function initProjectSwiper(cardCount) {
+  if (!swiperElement || cardCount === 0) return;
+
+  const desktopSlides = Math.min(cardCount, 3);
+
+  // Navigasi hanya diperlukan jika jumlah card melebihi kapasitas desktop.
+  const showNavigation = cardCount > 3;
+  prevBtn?.classList.toggle("!hidden", !showNavigation);
+  nextBtn?.classList.toggle("!hidden", !showNavigation);
+
+  swiper = new Swiper(swiperElement, {
+    slidesPerView: 1,
+    slidesPerGroup: 1,
+    spaceBetween: 18,
+    speed: 500,
+    loop: false,
+    watchOverflow: true,
+    observer: true,
+    observeParents: true,
+    grabCursor: cardCount > 1,
+    autoplay: cardCount > 3 ? {
+      delay: 3500,
+      disableOnInteraction: false,
+      pauseOnMouseEnter: true
+    } : false,
+    navigation: {
+      prevEl: prevBtn,
+      nextEl: nextBtn
+    },
+    pagination: {
+      el: paginationElement,
+      clickable: true
+    },
+    breakpoints: {
+      640: {
+        slidesPerView: Math.min(cardCount, 2),
+        spaceBetween: 20
+      },
+      1024: {
+        slidesPerView: desktopSlides,
+        spaceBetween: 24
+      }
+    }
+  });
+
+  swiper.update();
+}
+
+function renderProjectSlides(filter = "all") {
+  if (!swiperWrapper) return;
+
+  // Hancurkan instance lama sebelum mengganti isi wrapper.
+  destroyProjectSwiper();
+
+  const tempContainer = document.createElement("div");
+  tempContainer.innerHTML = originalSlidesHTML.join("");
+
+  const filteredSlides = Array.from(tempContainer.children).filter(slide => {
+    const category = slide.getAttribute("data-category");
+    return filter === "all" || category === filter;
+  });
+
+  swiperWrapper.innerHTML = "";
+  filteredSlides.forEach(slide => swiperWrapper.appendChild(slide));
+
+  if (paginationElement) paginationElement.innerHTML = "";
+
+  initProjectSwiper(filteredSlides.length);
+}
+
+// Filter awal.
+renderProjectSlides("all");
+
+filterButtons.forEach(button => {
+  button.addEventListener("click", () => {
+    filterButtons.forEach(filterButton => {
+      filterButton.classList.remove("bg-white", "text-black");
+      filterButton.classList.add("bg-gray-800", "text-white");
+    });
+
+    button.classList.remove("bg-gray-800", "text-white");
+    button.classList.add("bg-white", "text-black");
+
+    renderProjectSlides(button.dataset.filter);
+  });
+});
+
+// ================= MODAL =================
+const modal = document.getElementById("projectModal");
+
+function openModal() {
+    if (modal) modal.classList.remove("hidden");
+}
+
+function closeModal() {
+    if (modal) modal.classList.add("hidden");
+}
+
+const closeModalBtn = document.getElementById("closeModal");
+const closeModalBtn2 = document.getElementById("closeModal2");
+
+if (closeModalBtn) closeModalBtn.onclick = closeModal;
+if (closeModalBtn2) closeModalBtn2.onclick = closeModal;
+
+// Klik area gelap modal
+if (modal) {
+    modal.addEventListener("click", function (e) {
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
+}
+
+// ================= MODAL SERTIFIKAT =================
+// ==========================================
+// CERTIFICATE SWIPER
+// ==========================================
+
+const certificateSwiper = new Swiper('.certificateSwiper', {
+    slidesPerView: 'auto',
+    spaceBetween: 18,
+    centeredSlides: true,
+    loop: true,
+    speed: 4500,
+
+    autoplay: {
+        delay: 0,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: true,
+    },
+
+    grabCursor: true,
+
+    breakpoints: {
+        320: {
+            spaceBetween: 14,
+        },
+        640: {
+            spaceBetween: 18,
+        },
+        1024: {
+            spaceBetween: 22,
+        },
+    },
+});
+
+
+// ==========================================
+// OPEN MODAL
+// ==========================================
+
+function openModal(imageSrc) {
+    const modal = document.getElementById('certificateModal');
+    const modalImg = document.getElementById('modalImage');
+
+    if (!modal || !modalImg) return;
+
+    modalImg.src = imageSrc;
+
+    modal.classList.add('show');
+
+    document.body.style.overflow = 'hidden';
+
+    // Hentikan slider ketika modal terbuka
+    if (certificateSwiper && certificateSwiper.autoplay) {
+        certificateSwiper.autoplay.stop();
+    }
+}
+
+
+// ==========================================
+// CLOSE MODAL
+// ==========================================
+
+function closeModal() {
+    const modal = document.getElementById('certificateModal');
+    const modalImg = document.getElementById('modalImage');
+
+    if (!modal) return;
+
+    modal.classList.remove('show');
+
+    if (modalImg) {
+        modalImg.src = '';
+    }
+
+    document.body.style.overflow = '';
+
+    // Lanjutkan slider setelah modal ditutup
+    if (certificateSwiper && certificateSwiper.autoplay) {
+        certificateSwiper.autoplay.start();
+    }
+}
+
+
+// ==========================================
+// CLOSE WITH ESCAPE
+// ==========================================
+
+document.addEventListener('keydown', function(event) {
+    const modal = document.getElementById('certificateModal');
+
+    if (event.key === 'Escape' && modal.classList.contains('show')) {
+        closeModal();
+    }
+});
+
+
+</script>
+<!-- ========================================== -->
+<!-- CERTIFICATE MODAL / LIGHTBOX -->
+<!-- ========================================== -->
+
+<div
+    id="certificateModal"
+    onclick="closeModal()"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Certificate preview"
+>
+    <!-- Tombol Close -->
+    <button
+        type="button"
+        class="modal-close"
+        onclick="closeModal()"
+        aria-label="Close modal"
+        title="Tutup"
+    >
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="2.5"
+            stroke="currentColor"
+            class="w-6 h-6"
+        >
+            <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M6 18L18 6M6 6l12 12"
+            />
+        </svg>
+    </button>
+
+    <!-- Gambar -->
+    <div
+        class="modal-content"
+        onclick="event.stopPropagation()"
+    >
+        <img
+            id="modalImage"
+            src=""
+            alt="Expanded Certificate"
+        >
+    </div>
+</div>
+
+
+</body>
+</html>

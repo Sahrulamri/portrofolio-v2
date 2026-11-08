@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="id" x-data="{ darkMode: true }" :class="{ 'dark': darkMode }">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediksi Efidiensi Inhibisi Korosi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        [x-cloak] { display: none !important; }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 via-gray-100 to-zinc-200 
+             dark:from-[#121214] dark:via-[#18181B] dark:to-[#09090B] 
+             text-gray-800 dark:text-gray-200 min-h-screen font-sans antialiased transition-colors duration-500">
+    <main class="max-w-6xl mx-auto px-4 py-8 md:py-12">
+        
+        <div class="flex justify-between items-center mb-8">
+            <a href="../index.html" class="inline-flex items-center space-x-2 text-sm font-medium text-gray-500 hover:text-black dark:text-gray-400 dark:hover:text-white transition group">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4 transform group-hover:-translate-x-1 transition-transform">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+                </svg>
+                <span>Kembali ke Portofolio</span>
+            </a>
+
+            <button @click="darkMode = !darkMode" class="p-2.5 rounded-xl bg-white/60 dark:bg-white/10 border border-white/40 dark:border-white/20 backdrop-blur-xl shadow-lg hover:bg-white/80 dark:hover:bg-white/20 transition-all duration-300">
+                <svg x-show="darkMode" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-amber-400" x-cloak>
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m0 13.5V21M4.318 6.318l1.591 1.591M16.5 12.5a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM17.682 6.318l-1.591 1.591M6.318 17.682l1.591 1.591M17.682 17.682l-1.591-1.591M3.75 12h2.25m13.5 0h2.25" />
+                </svg>
+                <svg x-show="!darkMode" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-gray-700" x-cloak>
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 12.83A9.78 9.78 0 0 1 12 3a9 9 0 0 0 0 18 9.75 9.75 0 0 0 9.75-8.17Z" />
+                </svg>
+            </button>
+        </div>
+
+        <header class="flex items-center justify-center space-x-3 pb-8 mb-8 border-b border-gray-200 dark:border-neutral-800">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.2" stroke="currentColor" class="w-9 h-9 text-black dark:text-white">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-3-12v.75m0 3v.75m0 3v.75m0 3V18M6 6v.75m0 3v.75m0 3v.75m0 3V18m3-12v.75m0 3v.75m0 3v.75m0 3V18" />
+            </svg>
+            <h1 class="text-3xl md:text-4xl font-black tracking-tight text-gray-900 dark:text-white">
+                Prediksi Efidiensi Inhibisi Korosi - Detail Proyek
+            </h1>
+        </header>
+
+        <section 
+            class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start mb-12"
+            x-data="{ 
+                activeSlide: 1, 
+                totalSlides: 6, 
+                autoPlayInterval: null,
+                shadowX: 0,
+                shadowY: 0,
+                handleMouseMove(e) {
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    this.shadowX = Math.round(((e.clientX - rect.left) / rect.width - 0.5) * 35);
+                    this.shadowY = Math.round(((e.clientY - rect.top) / rect.height - 0.5) * 35);
+                },
+                resetShadow() {
+                    this.shadowX = 0;
+                    this.shadowY = 0;
+                },
+                init() {
+                    if (this.totalSlides > 1) {
+                        this.autoPlayInterval = setInterval(() => {
+                            this.activeSlide = this.activeSlide === this.totalSlides ? 1 : this.activeSlide + 1;
+                        }, 3000);
+                    }
+                }
+            }">
+            
+            <div
+                class="flex flex-col items-center space-y-4 w-full"
+                x-data="{
+                    isExpanded: false,
+                    expandedImgSrc: ''
+                }"
+            >
+                <div 
+                    @mousemove="handleMouseMove($event)"
+                    @mouseleave="resetShadow(); autoPlayInterval = setInterval(() => { activeSlide = activeSlide === totalSlides ? 1 : activeSlide + 1 }, 3000)"
+                    @mouseenter="clearInterval(autoPlayInterval)" 
+                    :style="darkMode 
+                        ? `box-shadow: ${-shadowX}px ${-shadowY}px 45px -2px rgba(255, 255, 255, 0.12), 0 10px 25px -5px rgba(0,0,0,0.5)` 
+                        : `box-shadow: ${-shadowX}px ${-shadowY}px 40px -5px rgba(0, 0, 0, 0.2)`"
+                    class="relative w-full aspect-[16/11] bg-white/70 dark:bg-white/10 border border-white/60 dark:border-white/20 backdrop-blur-xl rounded-2xl flex items-center justify-center overflow-hidden group transition-all duration-100 ease-out">
+                    
+                    <button 
+                        x-show="totalSlides > 1"
+                        @click="activeSlide = activeSlide === 1 ? totalSlides : activeSlide - 1"
+                        class="absolute left-4 z-40 bg-white/90 dark:bg-neutral-900/90 hover:bg-white dark:hover:bg-neutral-900 p-2.5 rounded-full border border-gray-200 dark:border-neutral-800 text-gray-700 dark:text-gray-300 transition shadow-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" /></svg>
+                    </button>
+
+                    <!-- Images Container -->
+                    <div class="w-full h-full flex items-center justify-center p-4 z-10 relative">
+
+                        <!-- Tombol Perbesar Gambar -->
+                        <button
+                            @click="
+                                expandedImgSrc = [
+                                    '../src/img/projects/ta/ta1.png',
+                                    '../src/img/projects/ta/ta2.png',
+                                    '../src/img/projects/ta/ta3.png',
+                                    '../src/img/projects/ta/ta4.png',
+                                    '../src/img/projects/ta/ta5.png',
+                                    '../src/img/projects/ta/ta6.png'
+                                ][activeSlide - 1];
+                                isExpanded = true;
+                            "
+                            class="absolute top-5 right-5 z-30 p-2.5 rounded-xl
+                                bg-white/80 dark:bg-neutral-900/80
+                                hover:bg-white dark:hover:bg-neutral-800
+                                border border-gray-200 dark:border-neutral-700
+                                text-gray-700 dark:text-gray-200
+                                shadow-md backdrop-blur-md
+                                transition-all duration-300
+                                opacity-0 group-hover:opacity-100"
+                            title="Perbesar gambar"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="2"
+                                stroke="currentColor"
+                                class="w-5 h-5"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M3.75 3.75v6m0-6h6m-6 0L10.5 10.5M20.25 3.75h-6m6 0v6m0-6l-6.75 6.75M3.75 20.25v-6m0 6h6m-6 0l6.75-6.75m9.75 6.75h-6m6 0v-6m0 6l-6.75-6.75"
+                                />
+                            </svg>
+                        </button>
+
+                        <!-- Gambar 1 -->
+                        <img
+                            x-show="activeSlide === 1"
+                            src="../src/img/projects/ta/ta1.png"
+                            alt="TA Korosi - Gambar 1"
+                            @click="
+                                isExpanded = true;
+                                expandedImgSrc = $el.src;
+                            "
+                            class="max-w-full max-h-full object-contain rounded-xl shadow-sm cursor-zoom-in"
+                        >
+
+                        <template x-if="totalSlides > 1">
+                            <div class="w-full h-full flex items-center justify-center">
+
+                                <!-- Gambar 2 -->
+                                <img
+                                    x-show="activeSlide === 2"
+                                    src="../src/img/projects/ta/ta2.png"
+                                    alt="TA Korosi - Gambar 2"
+                                    @click="
+                                        isExpanded = true;
+                                        expandedImgSrc = $el.src;
+                                    "
+                                    class="max-w-full max-h-full object-contain rounded-xl shadow-sm cursor-zoom-in"
+                                >
+
+                                <!-- Gambar 3 -->
+                                <img
+                                    x-show="activeSlide === 3"
+                                    src="../src/img/projects/ta/ta3.png"
+                                    alt="TA Korosi - Gambar 3"
+                                    @click="
+                                        isExpanded = true;
+                                        expandedImgSrc = $el.src;
+                                    "
+                                    class="max-w-full max-h-full object-contain rounded-xl shadow-sm cursor-zoom-in"
+                                >
+
+                                <!-- Gambar 4 -->
+                                <img
+                                    x-show="activeSlide === 4"
+                                    src="../src/img/projects/ta/ta4.png"
+                                    alt="TA Korosi - Gambar 4"
+                                    @click="
+                                        isExpanded = true;
+                                        expandedImgSrc = $el.src;
+                                    "
+                                    class="max-w-full max-h-full object-contain rounded-xl shadow-sm cursor-zoom-in"
+                                >
+
+                                <!-- Gambar 5 -->
+                                <img
+                                    x-show="activeSlide === 5"
+                                    src="../src/img/projects/ta/ta5.png"
+                                    alt="TA Korosi - Gambar 5"
+                                    @click="
+                                        isExpanded = true;
+                                        expandedImgSrc = $el.src;
+                                    "
+                                    class="max-w-full max-h-full object-contain rounded-xl shadow-sm cursor-zoom-in"
+                                >
+
+                                <!-- Gambar 6 -->
+                                <img
+                                    x-show="activeSlide === 6"
+                                    src="../src/img/projects/ta/ta6.png"
+                                    alt="TA Korosi - Gambar 6"
+                                    @click="
+                                        isExpanded = true;
+                                        expandedImgSrc = $el.src;
+                                    "
+                                    class="max-w-full max-h-full object-contain rounded-xl shadow-sm cursor-zoom-in"
+                                >
+
+                            </div>
+                        </template>
+
+                    </div>
+
+                    <button 
+                        x-show="totalSlides > 1"
+                        @click="activeSlide = activeSlide === totalSlides ? 1 : activeSlide + 1"
+                        class="absolute right-4 z-40 bg-white/80 dark:bg-neutral-900/80 hover:bg-white dark:hover:bg-neutral-900 p-2.5 rounded-full border border-gray-200 dark:border-neutral-800 text-gray-700 dark:text-gray-300 transition shadow-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+                    </button>
+                </div>
+                <!-- Dots Navigation -->
+                <div class="flex space-x-2 justify-center items-center h-4" x-show="totalSlides > 1">
+                    <template x-for="i in totalSlides">
+                        <span 
+                            @click="activeSlide = i"
+                            class="cursor-pointer transition-all duration-300 rounded-full"
+                            :class="activeSlide === i ? 'w-6 h-2 bg-black dark:bg-white' : 'w-2 h-2 bg-gray-300 dark:bg-neutral-700'">
+                        </span>
+                    </template>
+                </div>
+                <!-- Expanded Image Modal -->
+                <div
+                    x-show="isExpanded"
+                    x-transition:enter="transition ease-out duration-300"
+                    x-transition:enter-start="opacity-0"
+                    x-transition:enter-end="opacity-100"
+                    x-transition:leave="transition ease-in duration-200"
+                    x-transition:leave-start="opacity-100"
+                    x-transition:leave-end="opacity-0"
+                    class="fixed inset-0 z-50 flex items-center justify-center
+                        bg-black/80 backdrop-blur-md p-4 md:p-8"
+                    @click.self="isExpanded = false"
+                    @keydown.escape.window="isExpanded = false"
+                    style="display: none;"
+                >
+                    <!-- Tombol Tutup -->
+                    <button
+                        @click="isExpanded = false"
+                        class="absolute top-6 right-6 z-50
+                            bg-white/20 hover:bg-white/40
+                            text-white p-3 rounded-full
+                            transition duration-300"
+                        title="Tutup"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="2.5"
+                            stroke="currentColor"
+                            class="w-6 h-6"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M6 18L18 6M6 6l12 12"
+                            />
+                        </svg>
+                    </button>
+
+                    <!-- Expanded Image -->
+                    <img
+                        :src="expandedImgSrc"
+                        alt="Expanded TA Korosi"
+                        class="max-w-full max-h-[90vh] object-contain
+                            rounded-2xl shadow-2xl cursor-zoom-out"
+                        @click="isExpanded = false"
+                    >
+                </div>
+            </div>
+
+            <div class="flex flex-col space-y-4 w-full h-full justify-center">
+                
+                <div class="flex items-center space-x-4 bg-white/70 dark:bg-white/10 border border-white/60 dark:border-white/20 backdrop-blur-xl p-5 rounded-2xl shadow-xl transition-all duration-500">
+                    <div class="w-12 h-12 bg-neutral-200/80 dark:bg-white/15 text-neutral-900 dark:text-white rounded-xl flex items-center justify-center flex-shrink-0 transition-colors duration-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" /></svg>
+                    </div>
+                    <div>
+                        <span class="block text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-0.5">Role</span>
+                        <p class="font-extrabold text-gray-800 dark:text-gray-100 text-base md:text-lg">Data Scientist</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-4 bg-white/70 dark:bg-white/10 border border-white/60 dark:border-white/20 backdrop-blur-xl p-5 rounded-2xl shadow-xl transition-all duration-500">
+                    <div class="w-12 h-12 bg-neutral-200/80 dark:bg-white/15 text-neutral-900 dark:text-white rounded-xl flex items-center justify-center flex-shrink-0 transition-colors duration-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" /></svg>
+                    </div>
+                    <div>
+                        <span class="block text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-0.5">Tech Stack</span>
+                        <p class="font-bold text-gray-800 dark:text-gray-100 text-base md:text-lg">Gradient Boosting Regressor (GBR), Random Forest (RF), XGBoost, Support Vector Regression (SVR), Gaussian Mixture Model (GMM), HDBSCAN Clustering, Gaussian Noise, Bootstrap Sampling, RobustScale, Mutual Information (MI), Principal Component Analysis (PCA), eave-One-Out Cross-Validation (LOOCV, Grid Search & 5-fold Cross-Validation Internal, Permutation Testing </p>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-4 bg-white/70 dark:bg-white/10 border border-white/60 dark:border-white/20 backdrop-blur-xl p-5 rounded-2xl shadow-xl transition-all duration-500">
+                    <div class="w-12 h-12 bg-neutral-200/80 dark:bg-white/15 text-neutral-900 dark:text-white rounded-xl flex items-center justify-center flex-shrink-0 transition-colors duration-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499c.172-.468.824-.468.996 0l2.406 6.367a1 1 0 0 0 .95.69h6.814c.49 0 .692.63.3.94l-5.517 4.18a1 1 0 0 0-.364 1.118l2.135 5.655c.15.399-.313.742-.646.5l-5.518-4.18a1 1 0 0 0-1.175 0l-5.518 4.18c-.333.242-.797-.101-.646-.5l2.136-5.655a1 1 0 0 0-.364-1.118L2.308 11.62c-.393-.31-.192-.94.3-.94h6.814a1 1 0 0 0 .95-.69l2.406-6.368Z" /></svg>
+                    </div>
+                    <div>
+                        <span class="block text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-0.5">Fitur Utama</span>
+                        <p class="font-medium text-gray-700 dark:text-gray-300 text-sm md:text-base leading-relaxed">Kerangka Kerja Bebas Kebocoran Data (Leakage-Free Pipeline),Augmentasi Data Multi-Skala berbasis GMM (Gaussian Mixture Model), Rekayasa Fitur Berbasis Teori HSAB (Hard-Soft Acid-Base), Dukungan Multi-Algoritma Machine Learning & Ensemble, Otomatisasi Seleksi Fitur (Mutual Information & PCA), Evaluasi Performa Komprehensif & Analisis Residual</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="space-y-6">
+    
+            <!-- 1. Background -->
+            <div class="bg-white/20 dark:bg-white/3 border-2 border-black/10 dark:border-white/20 backdrop-blur-xl p-6 md:p-8 rounded-3xl shadow-md space-y-3 transition-all duration-500">
+                <div class="flex items-center space-x-2.5 text-black dark:text-white">
+                    <span class="bg-black text-white dark:bg-white dark:text-black w-8 h-8 rounded-xl flex items-center justify-center font-bold text-sm shadow-sm">📜</span>
+                    <h2 class="text-sm font-black uppercase tracking-wider">Background</h2>
+                </div>
+                <ul class="text-sm md:text-base text-gray-700 dark:text-gray-400 leading-relaxed list-disc list-inside space-y-1.5 pl-1">
+                    <li>Korosi pada baja karbon dalam lingkungan asam merupakan masalah krusial yang menyebabkan kerugian ekonomi global bernilai miliaran dolar setiap tahun.</li>
+                    <li>Metode eksperimental konvensional (seperti uji kehilangan berat dan elektrokimia) cenderung mahal, memakan waktu lama, dan memiliki tantangan dalam hal reproduksibilitas.</li>
+                    <li>Hal ini mendorong pemanfaatan pendekatan komputasional berbasis Machine Learning dan Quantitative Structure-Property Relationship (QSPR). Namun, studi QSPR pada inhibitor korosi sering kali terkendala oleh ukuran dataset yang sangat kecil (&lt;50 molekul), yang berisiko tinggi memicu overfitting dan menghasilkan evaluasi performa yang bias.</li>
+                </ul>
+            </div>
+
+            <!-- 2. Objective -->
+            <div class="bg-white/20 dark:bg-white/3 border-2 border-black/10 dark:border-white/20 backdrop-blur-xl p-6 md:p-8 rounded-3xl shadow-md space-y-3 transition-all duration-500">
+                <div class="flex items-center space-x-2.5 text-black dark:text-white">
+                    <span class="bg-black text-white dark:bg-white dark:text-black w-8 h-8 rounded-xl flex items-center justify-center font-bold text-sm shadow-sm">🎯</span>
+                    <h2 class="text-sm font-black uppercase tracking-wider">Objective</h2>
+                </div>
+                <p class="text-sm md:text-base text-gray-700 dark:text-gray-400 leading-relaxed">
+                    Mengembangkan kerangka kerja pemodelan QSPR machine learning yang sepenuhnya bebas dari kebocoran data (leakage-free), menerapkan feature engineering berbasis prinsip kimia teoretis, serta memanfaatkan Gaussian Mixture Model (GMM) untuk augmentasi data guna meningkatkan akurasi prediksi efisiensi inhibisi korosi pada dataset berukuran kecil.
+                </p>
+            </div>
+
+            <!-- 3. Dataset -->
+            <div class="bg-white/20 dark:bg-white/3 border-2 border-black/10 dark:border-white/20 backdrop-blur-xl p-6 md:p-8 rounded-3xl shadow-md space-y-3 transition-all duration-500">
+                <div class="flex items-center space-x-2.5 text-black dark:text-white">
+                    <span class="bg-black text-white dark:bg-white dark:text-black w-8 h-8 rounded-xl flex items-center justify-center font-bold text-sm shadow-sm">📊</span>
+                    <h2 class="text-sm font-black uppercase tracking-wider">Dataset</h2>
+                </div>
+                <ul class="text-sm md:text-base text-gray-700 dark:text-gray-400 leading-relaxed list-disc list-inside space-y-1.5 pl-1">
+                    <li>Berisi 20 senyawa turunan piridazin (pyridazine derivatives) yang dievaluasi menggunakan metode kuantum-kimia.</li>
+                    <li>Memiliki 12 deskriptor kimia-kuantum, meliputi Total Energy (TE), HOMO, LUMO, Energy Gap (&Delta;E), Dipole Moment (&mu;), energi ionisasi (I), afinitas elektron (A), elektronegativitas (&chi;), hardness (&eta;), softness (&sigma;), fraksi transfer elektron (&Delta;N), serta variabel target berupa Efisiensi Inhibisi Korosi (IE %).</li>
+                </ul>
+            </div>
+
+            <!-- 4. What -->
+            <div class="bg-white/20 dark:bg-white/3 border-2 border-black/10 dark:border-white/20 backdrop-blur-xl p-6 md:p-8 rounded-3xl shadow-md space-y-3 transition-all duration-500">
+                <div class="flex items-center space-x-2.5 text-black dark:text-white">
+                    <span class="bg-black text-white dark:bg-white dark:text-black w-8 h-8 rounded-xl flex items-center justify-center font-bold text-sm shadow-sm">💡</span>
+                    <h2 class="text-sm font-black uppercase tracking-wider">What</h2>
+                </div>
+                <p class="text-sm md:text-base text-gray-700 dark:text-gray-400 leading-relaxed">
+                    Proyek ini menghadirkan sebuah sistem komputasi QSPR end-to-end yang mengintegrasikan validasi silang ketat, pra-pemrosesan terisolasi, rekayasa fitur berbasis Teori Asam-Basa Keras-Lunak (HSAB), serta teknik augmentasi data generatif berbasis Gaussian Mixture Model (GMM) untuk mengatasi keterbatasan data pada prediksi efisiensi inhibisi korosi senyawa kimia.
+                </p>
+            </div>
+
+            <!-- 5. Why -->
+            <div class="bg-white/20 dark:bg-white/3 border-2 border-black/10 dark:border-white/20 backdrop-blur-xl p-6 md:p-8 rounded-3xl shadow-md space-y-3 transition-all duration-500">
+                <div class="flex items-center space-x-2.5 text-black dark:text-white">
+                    <span class="bg-black text-white dark:bg-white dark:text-black w-8 h-8 rounded-xl flex items-center justify-center font-bold text-sm shadow-sm">❓</span>
+                    <h2 class="text-sm font-black uppercase tracking-wider">Why</h2>
+                </div>
+                <ul class="text-sm md:text-base text-gray-700 dark:text-gray-400 leading-relaxed list-disc list-inside space-y-1.5 pl-1">
+                    <li>Sebagian besar literatur terdahulu melaporkan nilai R&sup2; &gt; 0.90 pada dataset kecil yang ternyata terbukti menyesatkan akibat terjadinya overfitting atau kesalahan metodologis seperti data leakage (pra-pemrosesan dilakukan sebelum pembagian data/split).</li>
+                    <li>Diperlukan sebuah metodologi yang ketat—menggabungkan validasi silang yang ketat, penskalaan per-fold, dan augmentasi khusus data latih—untuk menghasilkan model prediksi awal yang valid, stabil, dan dapat direplikasi secara ilmiah untuk penapisan material pencegah korosi.</li>
+                </ul>
+            </div>
+
+            <!-- 6. How -->
+            <div class="bg-white/20 dark:bg-white/3 border-2 border-black/10 dark:border-white/20 backdrop-blur-xl p-6 md:p-8 rounded-3xl shadow-md space-y-3 transition-all duration-500">
+                <div class="flex items-center space-x-2.5 text-black dark:text-white">
+                    <span class="bg-black text-white dark:bg-white dark:text-black w-8 h-8 rounded-xl flex items-center justify-center font-bold text-sm shadow-sm">&lt;/&gt;</span>
+                    <h2 class="text-sm font-black uppercase tracking-wider">How</h2>
+                </div>
+                <div class="text-sm md:text-base text-gray-700 dark:text-gray-400 leading-relaxed space-y-3">
+                    <ol class="list-decimal list-inside space-y-2 pl-1">
+                        <li><strong>Validasi Ketat (LOOCV)</strong>: Memastikan setiap sampel uji diuji secara independen tanpa pernah bersentuhan dengan proses pelatihan menggunakan <em>Leave-One-Out Cross-Validation</em>.</li>
+                        <li><strong>Pra-Pemrosesan Aman (Leakage-Free)</strong>: Menggunakan <code class="text-xs bg-black/10 dark:bg-white/10 px-1.5 py-0.5 rounded">RobustScaler</code> berbasis median dan IQR untuk mengatasi distribusi data yang tidak normal dan outlier secara per-fold.</li>
+                        <li><strong>Rekayasa Fitur (Feature Engineering)</strong>: Menambahkan kombinasi interaksi non-linear yang didasarkan pada Teori Asam-Basa Keras-Lunak (HSAB), seperti perkalian &chi; &times; &Delta;E dan &eta;&sup2;.</li>
+                        <li><strong>Augmentasi Data Berbasis GMM</strong>: Menerapkan <em>Gaussian Mixture Model</em> (GMM) multi-skala dan hierarkis secara eksklusif pada subset data latih di setiap iterasi fold untuk menghasilkan sampel sintetis yang valid secara kimiawi guna memperluas domain variabilitas.</li>
+                        <li><strong>Pelatihan Model Ensemble</strong>: Menguji berbagai algoritma machine learning termasuk <code class="text-xs bg-black/10 dark:bg-white/10 px-1.5 py-0.5 rounded">Gradient Boosting Regressor (GBR)</code>, <code class="text-xs bg-black/10 dark:bg-white/10 px-1.5 py-0.5 rounded">Random Forest (RF)</code>, <code class="text-xs bg-black/10 dark:bg-white/10 px-1.5 py-0.5 rounded">Support Vector Regression (SVR)</code>, dan <code class="text-xs bg-black/10 dark:bg-white/10 px-1.5 py-0.5 rounded">Extreme Gradient Boosting (XGBoost)</code>.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- 7. Results -->
+            <div class="bg-white/20 dark:bg-white/3 border-2 border-black/10 dark:border-white/20 backdrop-blur-xl p-6 md:p-8 rounded-3xl shadow-md space-y-3 transition-all duration-500">
+                <div class="flex items-center space-x-2.5 text-black dark:text-white">
+                    <span class="bg-black text-white dark:bg-white dark:text-black w-8 h-8 rounded-xl flex items-center justify-center font-bold text-sm shadow-sm">📈</span>
+                    <h2 class="text-sm font-black uppercase tracking-wider">Results</h2>
+                </div>
+                <div class="text-sm md:text-base text-gray-700 dark:text-gray-400 leading-relaxed space-y-2">
+                    <ul class="list-disc list-inside space-y-1.5 pl-1">
+                        <li>Model baseline tanpa augmentasi menunjukkan performa yang sangat lemah (<code class="text-xs bg-black/10 dark:bg-white/10 px-1.5 py-0.5 rounded">R&sup2; &lt; 0.20</code>), yang mengonfirmasi rendahnya kompleksitas informasi bawaan dari dataset mentah berukuran n=20.</li>
+                        <li>Kombinasi augmentasi berbasis GMM terbukti secara signifikan meningkatkan kemampuan generalisasi model:
+                            <ul class="list-disc list-inside pl-5 mt-1 space-y-1">
+                                <li>Konfigurasi <strong>XGBoost + GMM v2</strong> mencapai performa terbaik dengan nilai <code class="text-xs bg-black/10 dark:bg-white/10 px-1.5 py-0.5 rounded">R&sup2; = 0.4457</code>, <code class="text-xs bg-black/10 dark:bg-white/10 px-1.5 py-0.5 rounded">RMSE = 6.8214</code>, <code class="text-xs bg-black/10 dark:bg-white/10 px-1.5 py-0.5 rounded">MAE = 5.7189</code>, dan <code class="text-xs bg-black/10 dark:bg-white/10 px-1.5 py-0.5 rounded">MAPE = 6.99%</code> (peningkatan akurasi lebih dari 300% dibandingkan model tanpa augmentasi).</li>
+                                <li>Konfigurasi <strong>Random Forest + GMM v3</strong> menyusul di posisi kedua dengan <code class="text-xs bg-black/10 dark:bg-white/10 px-1.5 py-0.5 rounded">R&sup2; = 0.4108</code> dan <code class="text-xs bg-black/10 dark:bg-white/10 px-1.5 py-0.5 rounded">RMSE = 7.0331</code>.</li>
+                            </ul>
+                        </li>
+                        <li>Analisis residual dan pengujian permutasi statistik (<code class="text-xs bg-black/10 dark:bg-white/10 px-1.5 py-0.5 rounded">p &lt; 0.05</code>) mengonfirmasi bahwa peningkatan performa tersebut benar-benar valid secara statistik dan terbebas dari artefak kebetulan.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 8. Conclusion -->
+            <div class="bg-white/20 dark:bg-white/3 border-2 border-black/10 dark:border-white/20 backdrop-blur-xl p-6 md:p-8 rounded-3xl shadow-md space-y-3 transition-all duration-500">
+                <div class="flex items-center space-x-2.5 text-black dark:text-white">
+                    <span class="bg-black text-white dark:bg-white dark:text-black w-8 h-8 rounded-xl flex items-center justify-center font-bold text-sm shadow-sm">🏁</span>
+                    <h2 class="text-sm font-black uppercase tracking-wider">Conclusion</h2>
+                </div>
+                <ul class="text-sm md:text-base text-gray-700 dark:text-gray-400 leading-relaxed list-disc list-inside space-y-1.5 pl-1">
+                    <li>Kerangka kerja QSPR yang diusulkan berhasil membuktikan bahwa integrasi feature engineering berbasis prinsip kimia (HSAB) dan augmentasi data hierarkis berbasis GMM secara ketat (leakage-free) mampu mengatasi keterbatasan informasi pada dataset ultra-kecil (n=20).</li>
+                    <li>Meskipun nilai R&sup2; (0.41–0.45) belum mencukupi untuk prediksi kuantitatif presisi tinggi mutlak, metodologi ini sangat efektif dan bernilai strategis tinggi sebagai alat penyaringan awal (early-stage screening) untuk memprioritaskan kandidat inhibitor korosi baru secara efisien.</li>
+                </ul>
+            </div>
+
+        </section>
+        <footer class="mt-12 pt-6 border-t border-gray-200 dark:border-neutral-800 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <p class="text-xs text-gray-400 dark:text-gray-500">© 2026 QSPR Case Study. Seluruh Hak Cipta Dilindungi.</p>
+            <div class="flex items-center space-x-4 w-full sm:w-auto">
+                <a href="https://drive.google.com/file/d/1B4qqJH1tbW9IEJ4auInF-mmeX0BDwVyh/view?usp=sharing" target="_blank"
+                   class="flex-1 sm:flex-initial flex items-center justify-center space-x-2 px-6 py-2.5 bg-white/70 dark:bg-white/10 border border-gray-200 dark:border-white/20 hover:bg-white/90 dark:hover:bg-white/20 text-gray-700 dark:text-gray-300 font-medium rounded-xl transition text-sm shadow-md backdrop-blur-xl">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+                    </svg>
+                    <span>Doc</span>
+                </a>
+            </div>
+        </footer>
+    </main>
+</body>
+</html>

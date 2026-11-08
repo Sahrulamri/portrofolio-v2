@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="id" x-data="{ darkMode: true }" :class="{ 'dark': darkMode }">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEMOL (Service Motor Online) - Detail Proyek</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        [x-cloak] { display: none !important; }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 via-gray-100 to-zinc-200 
+             dark:from-[#121214] dark:via-[#18181B] dark:to-[#09090B] 
+             text-gray-800 dark:text-gray-200 min-h-screen font-sans antialiased transition-colors duration-500">
+             
+    <main class="max-w-6xl mx-auto px-4 py-8 md:py-12">
+        
+        <div class="flex justify-between items-center mb-8">
+            <a href="../index.html" class="inline-flex items-center space-x-2 text-sm font-medium text-gray-500 hover:text-black dark:text-gray-400 dark:hover:text-white transition group">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4 transform group-hover:-translate-x-1 transition-transform">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+                </svg>
+                <span>Kembali ke Portofolio</span>
+            </a>
+
+            <button @click="darkMode = !darkMode" class="p-2.5 rounded-xl bg-white/60 dark:bg-white/10 border border-white/40 dark:border-white/20 backdrop-blur-xl shadow-lg hover:bg-white/80 dark:hover:bg-white/20 transition-all duration-300">
+                <svg x-show="darkMode" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-amber-400" x-cloak>
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m0 13.5V21M4.318 6.318l1.591 1.591M16.5 12.5a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM17.682 6.318l-1.591 1.591M6.318 17.682l1.591 1.591M17.682 17.682l-1.591-1.591M3.75 12h2.25m13.5 0h2.25" />
+                </svg>
+                <svg x-show="!darkMode" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-gray-700" x-cloak>
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 12.83A9.78 9.78 0 0 1 12 3a9 9 0 0 0 0 18 9.75 9.75 0 0 0 9.75-8.17Z" />
+                </svg>
+            </button>
+        </div>
+
+        <header class="flex items-center justify-center space-x-3 pb-8 mb-8 border-b border-gray-200 dark:border-neutral-800">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.2" stroke="currentColor" class="w-9 h-9 text-black dark:text-white">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-3-12v.75m0 3v.75m0 3v.75m0 3V18M6 6v.75m0 3v.75m0 3v.75m0 3V18m3-12v.75m0 3v.75m0 3v.75m0 3V18" />
+            </svg>
+            <h1 class="text-3xl md:text-4xl font-black tracking-tight text-gray-900 dark:text-white">
+                SEMOL (Service Motor Online)
+            </h1>
+        </header>
+
+        <section 
+            class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start mb-12"
+            x-data="{ 
+                activeSlide: 1, 
+                totalSlides: 7, 
+                autoPlayInterval: null,
+                shadowX: 0,
+                shadowY: 0,
+                handleMouseMove(e) {
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    this.shadowX = Math.round(((e.clientX - rect.left) / rect.width - 0.5) * 35);
+                    this.shadowY = Math.round(((e.clientY - rect.top) / rect.height - 0.5) * 35);
+                },
+                resetShadow() {
+                    this.shadowX = 0;
+                    this.shadowY = 0;
+                },
+                init() {
+                    if (this.totalSlides > 1) {
+                        this.autoPlayInterval = setInterval(() => {
+                            this.activeSlide = this.activeSlide === this.totalSlides ? 1 : this.activeSlide + 1;
+                        }, 3000);
+                    }
+                }
+            }">
+            
+            <div
+                class="flex flex-col items-center space-y-4 w-full"
+                x-data="{
+                    isExpanded: false,
+                    expandedImgSrc: ''
+                }"
+            >
+                <div 
+                    @mousemove="handleMouseMove($event)"
+                    @mouseleave="resetShadow(); autoPlayInterval = setInterval(() => { activeSlide = activeSlide === totalSlides ? 1 : activeSlide + 1 }, 3000)"
+                    @mouseenter="clearInterval(autoPlayInterval)" 
+                    :style="darkMode 
+                        ? `box-shadow: ${-shadowX}px ${-shadowY}px 45px -2px rgba(255, 255, 255, 0.12), 0 10px 25px -5px rgba(0,0,0,0.5)` 
+                        : `box-shadow: ${-shadowX}px ${-shadowY}px 40px -5px rgba(0, 0, 0, 0.2)`"
+                    class="relative w-full aspect-[16/11] bg-white/70 dark:bg-white/10 border border-white/60 dark:border-white/20 backdrop-blur-xl rounded-2xl flex items-center justify-center overflow-hidden group transition-all duration-100 ease-out">
+                    
+                    <button 
+                        x-show="totalSlides > 1"
+                        @click="activeSlide = activeSlide === 1 ? totalSlides : activeSlide - 1"
+                        class="absolute left-4 z-40 bg-white/90 dark:bg-neutral-900/90 hover:bg-white dark:hover:bg-neutral-900 p-2.5 rounded-full border border-gray-200 dark:border-neutral-800 text-gray-700 dark:text-gray-300 transition shadow-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" /></svg>
+                    </button>
+
+                    <div class="w-full h-full flex items-center justify-center p-4 z-10">
+                        <!-- Tombol Expand -->
+                    <button
+                        x-show="totalSlides > 0"
+                        @click="
+                            const images = [
+                                '../src/img/semol.png',
+                                '../src/img/projects/semol/semol2.png',
+                                '../src/img/projects/semol/semol3.png',
+                                '../src/img/projects/semol/semol4.png',
+                                '../src/img/projects/semol/semol5.png',
+                                '../src/img/projects/semol/semol6.png',
+                                '../src/img/projects/semol/semol7.png'
+                            ];
+                            expandedImgSrc = images[activeSlide - 1];
+                            isExpanded = true;
+                        "
+                        class="absolute top-4 right-4 z-30 p-2.5 rounded-xl
+                            bg-white/90 dark:bg-neutral-900/90
+                            hover:bg-white dark:hover:bg-neutral-800
+                            border border-gray-200 dark:border-neutral-700
+                            text-gray-700 dark:text-gray-200
+                            shadow-md transition-all duration-300
+                            opacity-100 sm:opacity-0 sm:group-hover:opacity-100"
+                        title="Perbesar gambar"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="2"
+                            stroke="currentColor"
+                            class="w-5 h-5"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M3.75 3.75v6m0-6h6m-6 0L10.5 10.5m9.75-6.75v6m0-6h-6m6 0L13.5 10.5m-9.75 9.75v-6m0 6h6m-6 0L10.5 13.5m9.75 6.75v-6m0 6h-6m6 0L13.5 13.5"
+                            />
+                        </svg>
+                    </button>
+                        <!-- Gambar 1 -->
+                        <img
+                            x-show="activeSlide === 1"
+                            src="../src/img/semol.png"
+                            alt="SEMOL Project Image 1"
+                            @click="expandedImgSrc = $el.src; isExpanded = true"
+                            class="max-w-full max-h-full object-contain rounded-xl shadow-sm cursor-zoom-in"
+                        >
+
+                        <template x-if="totalSlides > 1">
+                            <div class="w-full h-full flex items-center justify-center">
+
+                                <!-- Gambar 2 -->
+                                <img
+                                    x-show="activeSlide === 2"
+                                    src="../src/img/projects/semol/semol2.png"
+                                    alt="SEMOL Project Image 2"
+                                    @click="expandedImgSrc = $el.src; isExpanded = true"
+                                    class="max-w-full max-h-full object-contain rounded-xl shadow-sm cursor-zoom-in"
+                                >
+
+                                <!-- Gambar 3 -->
+                                <img
+                                    x-show="activeSlide === 3"
+                                    src="../src/img/projects/semol/semol3.png"
+                                    alt="SEMOL Project Image 3"
+                                    @click="expandedImgSrc = $el.src; isExpanded = true"
+                                    class="max-w-full max-h-full object-contain rounded-xl shadow-sm cursor-zoom-in"
+                                >
+
+                                <!-- Gambar 4 -->
+                                <img
+                                    x-show="activeSlide === 4"
+                                    src="../src/img/projects/semol/semol4.png"
+                                    alt="SEMOL Project Image 4"
+                                    @click="expandedImgSrc = $el.src; isExpanded = true"
+                                    class="max-w-full max-h-full object-contain rounded-xl shadow-sm cursor-zoom-in"
+                                >
+
+                                <!-- Gambar 5 -->
+                                <img
+                                    x-show="activeSlide === 5"
+                                    src="../src/img/projects/semol/semol5.png"
+                                    alt="SEMOL Project Image 5"
+                                    @click="expandedImgSrc = $el.src; isExpanded = true"
+                                    class="max-w-full max-h-full object-contain rounded-xl shadow-sm cursor-zoom-in"
+                                >
+
+                                <!-- Gambar 6 -->
+                                <img
+                                    x-show="activeSlide === 6"
+                                    src="../src/img/projects/semol/semol6.png"
+                                    alt="SEMOL Project Image 6"
+                                    @click="expandedImgSrc = $el.src; isExpanded = true"
+                                    class="max-w-full max-h-full object-contain rounded-xl shadow-sm cursor-zoom-in"
+                                >
+
+                                <!-- Gambar 7 -->
+                                <img
+                                    x-show="activeSlide === 7"
+                                    src="../src/img/projects/semol/semol7.png"
+                                    alt="SEMOL Project Image 7"
+                                    @click="expandedImgSrc = $el.src; isExpanded = true"
+                                    class="max-w-full max-h-full object-contain rounded-xl shadow-sm cursor-zoom-in"
+                                >
+
+                            </div>
+                        </template>
+                    </div>
+
+                    <button 
+                        x-show="totalSlides > 1"
+                        @click="activeSlide = activeSlide === totalSlides ? 1 : activeSlide + 1"
+                        class="absolute right-4 z-40 bg-white/80 dark:bg-neutral-900/80 hover:bg-white dark:hover:bg-neutral-900 p-2.5 rounded-full border border-gray-200 dark:border-neutral-800 text-gray-700 dark:text-gray-300 transition shadow-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+                    </button>
+                </div>
+                <!-- Dots Navigation -->
+                <div class="flex space-x-2 justify-center items-center h-4" x-show="totalSlides > 1">
+                    <template x-for="i in totalSlides">
+                        <span 
+                            @click="activeSlide = i"
+                            class="cursor-pointer transition-all duration-300 rounded-full"
+                            :class="activeSlide === i ? 'w-6 h-2 bg-black dark:bg-white' : 'w-2 h-2 bg-gray-300 dark:bg-neutral-700'">
+                        </span>
+                    </template>
+                </div>
+                <!-- Modal Expand Image -->
+                <div
+                    x-show="isExpanded"
+                    x-cloak
+                    x-transition:enter="transition ease-out duration-300"
+                    x-transition:enter-start="opacity-0"
+                    x-transition:enter-end="opacity-100"
+                    x-transition:leave="transition ease-in duration-200"
+                    x-transition:leave-start="opacity-100"
+                    x-transition:leave-end="opacity-0"
+                    @click.self="isExpanded = false"
+                    @keydown.escape.window="isExpanded = false"
+                    class="fixed inset-0 z-[9999] flex items-center justify-center
+                        bg-black/90 backdrop-blur-md p-4 md:p-8"
+                >
+                    <!-- Tombol Tutup -->
+                    <button
+                        @click="isExpanded = false"
+                        class="absolute top-5 right-5 z-50 p-3 rounded-full
+                            bg-white/10 hover:bg-white/20 text-white
+                            border border-white/20 transition-all duration-300"
+                        title="Tutup gambar"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="2"
+                            stroke="currentColor"
+                            class="w-6 h-6"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M6 18L18 6M6 6l12 12"
+                            />
+                        </svg>
+                    </button>
+
+                    <!-- Gambar Ukuran Besar -->
+                    <img
+                        :src="expandedImgSrc"
+                        alt="Expanded SEMOL Project Image"
+                        @click.stop
+                        class="max-w-full max-h-full object-contain rounded-xl shadow-2xl"
+                    >
+                </div>
+            </div>
+
+            <div class="flex flex-col space-y-4 w-full h-full justify-center">
+                
+                <div class="flex items-center space-x-4 bg-white/70 dark:bg-white/10 border border-white/60 dark:border-white/20 backdrop-blur-xl p-5 rounded-2xl shadow-xl transition-all duration-500">
+                    <div class="w-12 h-12 bg-neutral-200/80 dark:bg-white/15 text-neutral-900 dark:text-white rounded-xl flex items-center justify-center flex-shrink-0 transition-colors duration-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" /></svg>
+                    </div>
+                    <div>
+                        <span class="block text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-0.5">Role</span>
+                        <p class="font-extrabold text-gray-800 dark:text-gray-100 text-base md:text-lg">Fullstack Developer</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-4 bg-white/70 dark:bg-white/10 border border-white/60 dark:border-white/20 backdrop-blur-xl p-5 rounded-2xl shadow-xl transition-all duration-500">
+                    <div class="w-12 h-12 bg-neutral-200/80 dark:bg-white/15 text-neutral-900 dark:text-white rounded-xl flex items-center justify-center flex-shrink-0 transition-colors duration-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" /></svg>
+                    </div>
+                    <div>
+                        <span class="block text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-0.5">Tech Stack</span>
+                        <p class="font-bold text-gray-800 dark:text-gray-100 text-base md:text-lg">Laravel, JavaScript, Alphine JS, Bootstrap 5, MySQL</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-4 bg-white/70 dark:bg-white/10 border border-white/60 dark:border-white/20 backdrop-blur-xl p-5 rounded-2xl shadow-xl transition-all duration-500">
+                    <div class="w-12 h-12 bg-neutral-200/80 dark:bg-white/15 text-neutral-900 dark:text-white rounded-xl flex items-center justify-center flex-shrink-0 transition-colors duration-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499c.172-.468.824-.468.996 0l2.406 6.367a1 1 0 0 0 .95.69h6.814c.49 0 .692.63.3.94l-5.517 4.18a1 1 0 0 0-.364 1.118l2.135 5.655c.15.399-.313.742-.646.5l-5.518-4.18a1 1 0 0 0-1.175 0l-5.518 4.18c-.333.242-.797-.101-.646-.5l2.136-5.655a1 1 0 0 0-.364-1.118L2.308 11.62c-.393-.31-.192-.94.3-.94h6.814a1 1 0 0 0 .95-.69l2.406-6.368Z" /></svg>
+                    </div>
+                    <div>
+                        <span class="block text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-0.5">Fitur Utama</span>
+                        <p class="font-medium text-gray-700 dark:text-gray-300 text-sm md:text-base leading-relaxed">Login, Register, Profile, Edit Profile, Logout, Booking Service, Delivery Sparepart, Dashboard</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="space-y-6">
+            
+            <div class="bg-white/20 dark:bg-white/3 border-2 border-black/10 dark:border-white/20 backdrop-blur-xl p-6 md:p-8 rounded-3xl shadow-md space-y-3 transition-all duration-500">
+                <div class="flex items-center space-x-2.5 text-black dark:text-white">
+                    <span class="bg-black text-white dark:bg-white dark:text-black w-8 h-8 rounded-xl flex items-center justify-center font-bold text-sm shadow-sm">?</span>
+                    <h2 class="text-sm font-black uppercase tracking-wider">Why</h2>
+                </div>
+                <p class="text-sm md:text-base text-gray-700 dark:text-gray-400 leading-relaxed">
+                    SEMOL (Service Motor Online) adalah platform berbasis web yang dirancang untuk mempermudah proses pemesanan layanan servis motor secara daring. Dengan mengintegrasikan fitur-fitur seperti booking service, pengiriman suku cadang, dan manajemen profil pengguna, SEMOL bertujuan untuk meningkatkan efisiensi
+                </p>
+            </div>
+
+            <div class="bg-white/20 dark:bg-white/3 border-2 border-black/10 dark:border-white/20 backdrop-blur-xl p-6 md:p-8 rounded-3xl shadow-md space-y-3 transition-all duration-500">
+                <div class="flex items-center space-x-2.5 text-black dark:text-white">
+                    <span class="bg-black text-white dark:bg-white dark:text-black w-8 h-8 rounded-xl flex items-center justify-center font-bold text-sm shadow-sm">💡</span>
+                    <h2 class="text-sm font-black uppercase tracking-wider">What</h2>
+                </div>
+                <p class="text-sm md:text-base text-gray-700 dark:text-gray-400 leading-relaxed">
+                    Alasan utama pembuatan proyek ini adalah untuk mengatasi masalah efisiensi waktu yang sering dihadapi oleh para pemilik sepeda motor yang memiliki mobilitas tinggi. Banyak pekerja kantoran atau pelaku usaha yang kesulitan meluangkan waktu berjam-jam untuk mengantre di bengkel resmi maupun umum. Selain menjadi solusi praktis harian, layanan ini juga berfungsi sebagai penyelamat dalam kondisi darurat, seperti saat motor mogok di tengah jalan atau di rumah. Dengan pertumbuhan jumlah pengguna sepeda motor yang terus meningkat pesat setiap tahunnya, proyek ini menangkap peluang pasar yang sangat luas dengan menawarkan kenyamanan, transparansi harga, dan kepastian mekanik profesional.
+                 </p>
+            </div>
+
+            <div class="bg-white/20 dark:bg-white/3 border-2 border-black/10 dark:border-white/20 backdrop-blur-xl p-6 md:p-8 rounded-3xl shadow-md space-y-3 transition-all duration-500">
+                <div class="flex items-center space-x-2.5 text-black dark:text-white">
+                    <span class="bg-black text-white dark:bg-white dark:text-black w-8 h-8 rounded-xl flex items-center justify-center font-bold text-sm shadow-sm">&lt;/&gt;</span>
+                    <h2 class="text-sm font-black uppercase tracking-wider">How</h2>
+                </div>
+                <p class="text-sm md:text-base text-gray-700 dark:text-gray-400 leading-relaxed">
+                    Cara kerja sistem ini dirancang dengan alur yang sangat sederhana demi kemudahan pengguna. Prosesnya dimulai dari tahap pemesanan, di mana pelanggan masuk ke platform untuk memilih jenis servis, menentukan lokasi penjemputan atau pengerjaan, serta mengatur jadwal kedatangan mekanik. Setelah pesanan terkonfirmasi, mekanik terdekat akan datang membawa peralatan lengkap dan langsung melakukan pengecekan awal terhadap kondisi komponen vital motor. Proses perbaikan atau penggantian suku cadang kemudian dilakukan di tempat secara transparan di depan pemiliknya. Setelah seluruh pengerjaan selesai, proses diakhiri dengan pembayaran yang fleksibel, baik secara tunai maupun nontunai melalui transfer bank atau dompet digital, lengkap dengan riwayat servis yang tercatat otomatis di sistem.
+                </p>
+            </div>
+
+        </section>
+
+        <footer class="mt-12 pt-6 border-t border-gray-200 dark:border-neutral-800 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <p class="text-xs text-gray-400 dark:text-gray-500">© 2026 SEMOL (Service Motor Online) Case Study. Seluruh Hak Cipta Dilindungi.</p>
+            
+            <div class="flex items-center space-x-4 w-full sm:w-auto">
+                <a href="https://github.com/Sahrulamri/service-motor-online" target="_blank"
+                   class="flex-1 sm:flex-initial flex items-center justify-center space-x-2 px-6 py-2.5 bg-white/70 dark:bg-white/10 border border-gray-200 dark:border-white/20 hover:bg-white/90 dark:hover:bg-white/20 text-gray-700 dark:text-gray-300 font-medium rounded-xl transition text-sm shadow-md backdrop-blur-xl">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    <span>GitHub</span>
+                </a>
+            </div>
+        </footer>
+    </main>
+
+</body>
+</html>
